@@ -59,16 +59,49 @@ interface AppContextType {
   submitCollaboration: (data: Omit<CollaborationRequest, 'id' | 'createdAt' | 'status'> & { honeypot?: string }) => Promise<{ success: boolean; error?: string }>;
   submitContact: (data: Omit<ContactRequest, 'id' | 'createdAt' | 'status'> & { honeypot?: string }) => Promise<{ success: boolean; error?: string }>;
   submitPress: (data: Omit<PressRequest, 'id' | 'createdAt' | 'status'> & { honeypot?: string }) => Promise<{ success: boolean; error?: string }>;
+  
+  // Collaborations CRM
   updateCollaborationStatus: (id: string, status: CollaborationStatus, internalNotes?: string) => void;
+  deleteCollaboration: (id: string) => void;
+
+  // Press & Messages
+  updatePressStatus: (id: string, status: 'NEW' | 'REPLIED' | 'ARCHIVED') => void;
+  deletePressRequest: (id: string) => void;
+  updateContactStatus: (id: string, status: 'NEW' | 'READ' | 'ARCHIVED') => void;
+  deleteContactRequest: (id: string) => void;
+
+  // Profile & Disciplines
   updateProfile: (profile: ProfileData) => void;
+
+  // Statistics
+  addStat: (stat: Omit<StatItem, 'id'>) => void;
   updateStat: (stat: StatItem) => void;
+  deleteStat: (id: string) => void;
+
+  // Television Projects
+  addTVProject: (project: Omit<TVProject, 'id'>) => void;
   updateTVProject: (project: TVProject) => void;
+  deleteTVProject: (id: string) => void;
+
+  // Beauty Articles
   addBeautyArticle: (article: Omit<BeautyArticle, 'id'>) => void;
   updateBeautyArticle: (article: BeautyArticle) => void;
   deleteBeautyArticle: (id: string) => void;
+
+  // Gallery
   addGalleryItem: (item: Omit<GalleryItem, 'id'>) => void;
+  updateGalleryItem: (item: GalleryItem) => void;
   deleteGalleryItem: (id: string) => void;
+
+  // Social & Settings
+  updateSocialAccounts: (accounts: SocialAccount[]) => void;
   updateSiteSettings: (settings: SiteSettings) => void;
+
+  // Data Management & Backup
+  clearAuditLogs: () => void;
+  resetToDefaults: () => void;
+  exportCMSData: () => string;
+  importCMSData: (jsonData: string) => { success: boolean; error?: string };
   
   // Admin Authentication
   isAdminAuthenticated: boolean;
@@ -383,12 +416,82 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     logAudit('UPDATE_COLLAB_STATUS', 'CollaborationRequest', id);
   };
 
+  const deleteCollaboration = (id: string) => {
+    setCollaborationsState((prev) => {
+      const updated = prev.filter((item) => item.id !== id);
+      try {
+        localStorage.setItem(STORAGE_KEYS.COLLABS, JSON.stringify(updated));
+      } catch (e) {}
+      return updated;
+    });
+    logAudit('DELETE_COLLABORATION', 'CollaborationRequest', id);
+  };
+
+  const updatePressStatus = (id: string, status: 'NEW' | 'REPLIED' | 'ARCHIVED') => {
+    setPressRequestsState((prev) => {
+      const updated = prev.map((pr) => (pr.id === id ? { ...pr, status } : pr));
+      try {
+        localStorage.setItem(STORAGE_KEYS.PRESS, JSON.stringify(updated));
+      } catch (e) {}
+      return updated;
+    });
+    logAudit('UPDATE_PRESS_STATUS', 'PressRequest', id);
+  };
+
+  const deletePressRequest = (id: string) => {
+    setPressRequestsState((prev) => {
+      const updated = prev.filter((pr) => pr.id !== id);
+      try {
+        localStorage.setItem(STORAGE_KEYS.PRESS, JSON.stringify(updated));
+      } catch (e) {}
+      return updated;
+    });
+    logAudit('DELETE_PRESS_REQUEST', 'PressRequest', id);
+  };
+
+  const updateContactStatus = (id: string, status: 'NEW' | 'READ' | 'ARCHIVED') => {
+    setContactRequestsState((prev) => {
+      const updated = prev.map((cnt) => (cnt.id === id ? { ...cnt, status } : cnt));
+      try {
+        localStorage.setItem(STORAGE_KEYS.CONTACT, JSON.stringify(updated));
+      } catch (e) {}
+      return updated;
+    });
+    logAudit('UPDATE_CONTACT_STATUS', 'ContactRequest', id);
+  };
+
+  const deleteContactRequest = (id: string) => {
+    setContactRequestsState((prev) => {
+      const updated = prev.filter((cnt) => cnt.id !== id);
+      try {
+        localStorage.setItem(STORAGE_KEYS.CONTACT, JSON.stringify(updated));
+      } catch (e) {}
+      return updated;
+    });
+    logAudit('DELETE_CONTACT_REQUEST', 'ContactRequest', id);
+  };
+
   const updateProfile = (newProfile: ProfileData) => {
     setProfileState(newProfile);
     try {
       localStorage.setItem(STORAGE_KEYS.PROFILE, JSON.stringify(newProfile));
     } catch (e) {}
     logAudit('UPDATE_PROFILE', 'ProfileData', 'profile');
+  };
+
+  const addStat = (stat: Omit<StatItem, 'id'>) => {
+    const newStat: StatItem = {
+      ...stat,
+      id: 'stat-' + Date.now()
+    };
+    setStatsState((prev) => {
+      const updated = [...prev, newStat];
+      try {
+        localStorage.setItem(STORAGE_KEYS.STATS, JSON.stringify(updated));
+      } catch (e) {}
+      return updated;
+    });
+    logAudit('ADD_STAT', 'StatItem', newStat.id);
   };
 
   const updateStat = (updatedStat: StatItem) => {
@@ -402,6 +505,32 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     logAudit('UPDATE_STAT', 'StatItem', updatedStat.id);
   };
 
+  const deleteStat = (id: string) => {
+    setStatsState((prev) => {
+      const updated = prev.filter((s) => s.id !== id);
+      try {
+        localStorage.setItem(STORAGE_KEYS.STATS, JSON.stringify(updated));
+      } catch (e) {}
+      return updated;
+    });
+    logAudit('DELETE_STAT', 'StatItem', id);
+  };
+
+  const addTVProject = (project: Omit<TVProject, 'id'>) => {
+    const newProject: TVProject = {
+      ...project,
+      id: 'tv-' + Date.now()
+    };
+    setTvProjectsState((prev) => {
+      const updated = [newProject, ...prev];
+      try {
+        localStorage.setItem(STORAGE_KEYS.TV, JSON.stringify(updated));
+      } catch (e) {}
+      return updated;
+    });
+    logAudit('ADD_TV_PROJECT', 'TVProject', newProject.id);
+  };
+
   const updateTVProject = (project: TVProject) => {
     setTvProjectsState((prev) => {
       const updated = prev.map((p) => (p.id === project.id ? project : p));
@@ -411,6 +540,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       return updated;
     });
     logAudit('UPDATE_TV_PROJECT', 'TVProject', project.id);
+  };
+
+  const deleteTVProject = (id: string) => {
+    setTvProjectsState((prev) => {
+      const updated = prev.filter((p) => p.id !== id);
+      try {
+        localStorage.setItem(STORAGE_KEYS.TV, JSON.stringify(updated));
+      } catch (e) {}
+      return updated;
+    });
+    logAudit('DELETE_TV_PROJECT', 'TVProject', id);
   };
 
   const addBeautyArticle = (article: Omit<BeautyArticle, 'id'>) => {
@@ -465,6 +605,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     logAudit('ADD_GALLERY_ITEM', 'GalleryItem', newItem.id);
   };
 
+  const updateGalleryItem = (item: GalleryItem) => {
+    setGalleryState((prev) => {
+      const updated = prev.map((g) => (g.id === item.id ? item : g));
+      try {
+        localStorage.setItem(STORAGE_KEYS.GALLERY, JSON.stringify(updated));
+      } catch (e) {}
+      return updated;
+    });
+    logAudit('UPDATE_GALLERY_ITEM', 'GalleryItem', item.id);
+  };
+
   const deleteGalleryItem = (id: string) => {
     setGalleryState((prev) => {
       const updated = prev.filter((g) => g.id !== id);
@@ -476,12 +627,129 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     logAudit('DELETE_GALLERY_ITEM', 'GalleryItem', id);
   };
 
+  const updateSocialAccounts = (accounts: SocialAccount[]) => {
+    setSocialAccountsState(accounts);
+    try {
+      localStorage.setItem(STORAGE_KEYS.SOCIALS, JSON.stringify(accounts));
+    } catch (e) {}
+    logAudit('UPDATE_SOCIAL_ACCOUNTS', 'SocialAccounts', 'all');
+  };
+
   const updateSiteSettings = (settings: SiteSettings) => {
     setSiteSettingsState(settings);
     try {
       localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(settings));
     } catch (e) {}
     logAudit('UPDATE_SITE_SETTINGS', 'SiteSettings', 'settings');
+  };
+
+  const clearAuditLogs = () => {
+    setAuditLogsState([]);
+    try {
+      localStorage.removeItem(STORAGE_KEYS.LOGS);
+    } catch (e) {}
+  };
+
+  const resetToDefaults = () => {
+    setProfileState(initialProfile);
+    setSocialAccountsState(initialSocialAccounts);
+    setStatsState(initialStats);
+    setTvProjectsState(initialTVProjects);
+    setBeautyArticlesState(initialBeautyArticles);
+    setGalleryState(initialGallery);
+    setCollaborationsState(initialCollaborations);
+    setPressRequestsState(initialPressRequests);
+    setContactRequestsState(initialContactRequests);
+    setSiteSettingsState(initialSiteSettings);
+    setAuditLogsState(initialAuditLogs);
+
+    try {
+      localStorage.setItem(STORAGE_KEYS.PROFILE, JSON.stringify(initialProfile));
+      localStorage.setItem(STORAGE_KEYS.SOCIALS, JSON.stringify(initialSocialAccounts));
+      localStorage.setItem(STORAGE_KEYS.STATS, JSON.stringify(initialStats));
+      localStorage.setItem(STORAGE_KEYS.TV, JSON.stringify(initialTVProjects));
+      localStorage.setItem(STORAGE_KEYS.ARTICLES, JSON.stringify(initialBeautyArticles));
+      localStorage.setItem(STORAGE_KEYS.GALLERY, JSON.stringify(initialGallery));
+      localStorage.setItem(STORAGE_KEYS.COLLABS, JSON.stringify(initialCollaborations));
+      localStorage.setItem(STORAGE_KEYS.PRESS, JSON.stringify(initialPressRequests));
+      localStorage.setItem(STORAGE_KEYS.CONTACT, JSON.stringify(initialContactRequests));
+      localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(initialSiteSettings));
+      localStorage.setItem(STORAGE_KEYS.LOGS, JSON.stringify(initialAuditLogs));
+    } catch (e) {}
+
+    logAudit('CMS_RESET_TO_DEFAULTS', 'CMS', 'all');
+  };
+
+  const exportCMSData = () => {
+    const backup = {
+      exportedAt: new Date().toISOString(),
+      profile,
+      socialAccounts,
+      stats,
+      tvProjects,
+      beautyArticles,
+      gallery,
+      collaborations,
+      pressRequests,
+      contactRequests,
+      siteSettings,
+      auditLogs
+    };
+    logAudit('CMS_DATA_EXPORTED', 'CMS', 'backup');
+    return JSON.stringify(backup, null, 2);
+  };
+
+  const importCMSData = (jsonData: string) => {
+    try {
+      const data = JSON.parse(jsonData);
+      if (!data.profile || !Array.isArray(data.stats)) {
+        return { success: false, error: 'Structure de sauvegarde invalide.' };
+      }
+      if (data.profile) {
+        setProfileState(data.profile);
+        localStorage.setItem(STORAGE_KEYS.PROFILE, JSON.stringify(data.profile));
+      }
+      if (data.socialAccounts) {
+        setSocialAccountsState(data.socialAccounts);
+        localStorage.setItem(STORAGE_KEYS.SOCIALS, JSON.stringify(data.socialAccounts));
+      }
+      if (data.stats) {
+        setStatsState(data.stats);
+        localStorage.setItem(STORAGE_KEYS.STATS, JSON.stringify(data.stats));
+      }
+      if (data.tvProjects) {
+        setTvProjectsState(data.tvProjects);
+        localStorage.setItem(STORAGE_KEYS.TV, JSON.stringify(data.tvProjects));
+      }
+      if (data.beautyArticles) {
+        setBeautyArticlesState(data.beautyArticles);
+        localStorage.setItem(STORAGE_KEYS.ARTICLES, JSON.stringify(data.beautyArticles));
+      }
+      if (data.gallery) {
+        setGalleryState(data.gallery);
+        localStorage.setItem(STORAGE_KEYS.GALLERY, JSON.stringify(data.gallery));
+      }
+      if (data.collaborations) {
+        setCollaborationsState(data.collaborations);
+        localStorage.setItem(STORAGE_KEYS.COLLABS, JSON.stringify(data.collaborations));
+      }
+      if (data.pressRequests) {
+        setPressRequestsState(data.pressRequests);
+        localStorage.setItem(STORAGE_KEYS.PRESS, JSON.stringify(data.pressRequests));
+      }
+      if (data.contactRequests) {
+        setContactRequestsState(data.contactRequests);
+        localStorage.setItem(STORAGE_KEYS.CONTACT, JSON.stringify(data.contactRequests));
+      }
+      if (data.siteSettings) {
+        setSiteSettingsState(data.siteSettings);
+        localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(data.siteSettings));
+      }
+      logAudit('CMS_DATA_IMPORTED', 'CMS', 'restore');
+      return { success: true };
+    } catch (err: any) {
+      return { success: false, error: err?.message || 'Erreur lors du décodage du fichier JSON.' };
+    }
   };
 
   const adminLogin = (password: string) => {
@@ -535,15 +803,30 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         submitContact,
         submitPress,
         updateCollaborationStatus,
+        deleteCollaboration,
+        updatePressStatus,
+        deletePressRequest,
+        updateContactStatus,
+        deleteContactRequest,
         updateProfile,
+        addStat,
         updateStat,
+        deleteStat,
+        addTVProject,
         updateTVProject,
+        deleteTVProject,
         addBeautyArticle,
         updateBeautyArticle,
         deleteBeautyArticle,
         addGalleryItem,
+        updateGalleryItem,
         deleteGalleryItem,
+        updateSocialAccounts,
         updateSiteSettings,
+        clearAuditLogs,
+        resetToDefaults,
+        exportCMSData,
+        importCMSData,
         isAdminAuthenticated,
         adminLogin,
         adminLogout

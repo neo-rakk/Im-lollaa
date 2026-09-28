@@ -213,6 +213,13 @@ export const Footer: React.FC = () => {
             >
               {t.footer.cookies}
             </button>
+            <button
+              onClick={() => setCurrentView('admin')}
+              className="hover:text-[#B79A7E] transition-colors flex items-center gap-1 font-mono text-[11px]"
+              title="Console d’administration CMS"
+            >
+              <span>CMS</span>
+            </button>
           </div>
         </div>
 
