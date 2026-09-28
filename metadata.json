@@ -1,0 +1,6 @@
+{
+  "name": "LOLA — Official Website | Khaoula Kebbache",
+  "description": "Site officiel de Lola (Khaoula Kebbache) — Créatrice de contenu, animatrice TV & experte beauté.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
