@@ -55,7 +55,7 @@ export const ContactSection: React.FC = () => {
             </h2>
           </div>
           <p className="text-[11px] sm:text-xs tracking-widest text-[#C7B8A8]/70 uppercase">
-            COMMUNICATION OFFICIELLE & SÉCURISÉE
+            {t.contact.subtitle}
           </p>
         </div>
 
@@ -65,16 +65,16 @@ export const ContactSection: React.FC = () => {
           <div className="lg:col-span-5 space-y-6 sm:space-y-8">
             <div className="border border-[#27272A] bg-[#141210] p-6 sm:p-8 space-y-4 sm:space-y-6">
               <h3 className="font-serif text-xl sm:text-2xl text-[#F7F3EE] font-medium">
-                Adresses Électroniques Officielles
+                {t.contact.addressesTitle}
               </h3>
               <p className="text-xs sm:text-sm text-[#C7B8A8] font-light leading-relaxed">
-                Afin de garantir un traitement rapide et sécurisé, vos communications sont directement orientées vers les pôles dédiés.
+                {t.contact.addressesDesc}
               </p>
 
               <div className="space-y-3 sm:space-y-4 pt-4 border-t border-[#27272A]/70 text-xs">
                 <div>
                   <span className="text-[9px] sm:text-[10px] font-mono tracking-widest text-[#B79A7E] uppercase">
-                    CONTACT GÉNÉRAL
+                    {t.contact.generalEmailLabel}
                   </span>
                   <p className="text-xs sm:text-sm font-medium text-[#F7F3EE] font-mono mt-0.5 break-all">
                     {siteSettings.generalEmail}
@@ -83,7 +83,7 @@ export const ContactSection: React.FC = () => {
 
                 <div>
                   <span className="text-[9px] sm:text-[10px] font-mono tracking-widest text-[#B79A7E] uppercase">
-                    COLLABORATIONS & MARQUES
+                    {t.contact.collabEmailLabel}
                   </span>
                   <p className="text-xs sm:text-sm font-medium text-[#F7F3EE] font-mono mt-0.5 break-all">
                     {siteSettings.collabEmail}
@@ -92,7 +92,7 @@ export const ContactSection: React.FC = () => {
 
                 <div>
                   <span className="text-[9px] sm:text-[10px] font-mono tracking-widest text-[#B79A7E] uppercase">
-                    RELATIONS PRESSE & MÉDIAS
+                    {t.contact.pressEmailLabel}
                   </span>
                   <p className="text-xs sm:text-sm font-medium text-[#F7F3EE] font-mono mt-0.5 break-all">
                     {siteSettings.pressEmail}
@@ -103,9 +103,9 @@ export const ContactSection: React.FC = () => {
               <div className="pt-4 sm:pt-6 border-t border-[#27272A]/60">
                 <button
                   onClick={() => setCurrentView('collaborate')}
-                  className="w-full py-3.5 border border-[#B79A7E] text-xs font-semibold tracking-wider text-[#B79A7E] hover:bg-[#B79A7E] hover:text-black uppercase transition-colors min-h-[48px] flex items-center justify-center"
+                  className="w-full py-3.5 border border-[#B79A7E] text-xs font-semibold tracking-wider text-[#B79A7E] hover:bg-[#B79A7E] hover:text-black uppercase transition-colors min-h-[48px] flex items-center justify-center text-center"
                 >
-                  DÉPOSER UN BRIEF MARQUE OFFICIEL
+                  {t.contact.proBriefBtn}
                 </button>
               </div>
             </div>
@@ -141,7 +141,7 @@ export const ContactSection: React.FC = () => {
               <div className="py-8 sm:py-12 text-center space-y-4">
                 <CheckCircle2 className="w-12 h-12 text-[#B79A7E] mx-auto" />
                 <h4 className="font-serif text-xl sm:text-2xl text-[#F7F3EE]">
-                  Message transmis avec succès
+                  {t.collaborate.successTitle}
                 </h4>
                 <p className="text-xs sm:text-sm text-[#C7B8A8] max-w-md mx-auto">
                   {t.contact.success}
@@ -150,7 +150,7 @@ export const ContactSection: React.FC = () => {
                   onClick={() => setSuccess(false)}
                   className="mt-4 px-6 py-2.5 border border-[#27272A] text-xs text-[#F7F3EE] hover:border-[#B79A7E] min-h-[44px]"
                 >
-                  Envoyer un autre message
+                  {t.contact.sendAnother}
                 </button>
               </div>
             ) : (
@@ -187,7 +187,7 @@ export const ContactSection: React.FC = () => {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-xs text-[#F7F3EE] transition-colors min-h-[44px]"
-                      placeholder="Prénom Nom"
+                      placeholder={t.contact.namePlaceholder}
                     />
                   </div>
 
@@ -201,7 +201,7 @@ export const ContactSection: React.FC = () => {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-xs text-[#F7F3EE] transition-colors min-h-[44px]"
-                      placeholder="votre.email@domaine.com"
+                      placeholder={t.contact.emailPlaceholder}
                     />
                   </div>
                 </div>
@@ -215,7 +215,7 @@ export const ContactSection: React.FC = () => {
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-xs text-[#F7F3EE] transition-colors min-h-[44px]"
-                    placeholder="Objet de votre demande"
+                    placeholder={t.contact.subjectPlaceholder}
                   />
                 </div>
 
@@ -229,7 +229,7 @@ export const ContactSection: React.FC = () => {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-xs text-[#F7F3EE] transition-colors"
-                    placeholder="Rédigez votre message..."
+                    placeholder={t.contact.messagePlaceholder}
                   />
                 </div>
 
@@ -239,7 +239,7 @@ export const ContactSection: React.FC = () => {
                   className="w-full inline-flex items-center justify-center gap-2 py-3.5 sm:py-4 bg-[#F7F3EE] text-[#0B0B0B] text-xs font-semibold tracking-[0.18em] uppercase hover:bg-[#B79A7E] hover:text-white transition-all disabled:opacity-50 min-h-[48px]"
                 >
                   <Send className="w-3.5 h-3.5" />
-                  <span>{isSubmitting ? 'TRANSMISSION EN COURS...' : t.contact.send}</span>
+                  <span>{isSubmitting ? t.contact.sending : t.contact.send}</span>
                 </button>
               </form>
             )}

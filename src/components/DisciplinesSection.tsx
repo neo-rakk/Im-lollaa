@@ -3,7 +3,7 @@ import { useApp } from '../context/AppContext';
 import { ArrowUpRight } from 'lucide-react';
 
 export const DisciplinesSection: React.FC = () => {
-  const { t, profile, setCurrentView, setSelectedTvProject, tvProjects } = useApp();
+  const { t, lang, profile, setCurrentView, setSelectedTvProject, tvProjects } = useApp();
 
   const handleDisciplineClick = (index: number) => {
     if (index === 0) {
@@ -33,7 +33,7 @@ export const DisciplinesSection: React.FC = () => {
             </h2>
           </div>
           <p className="text-[11px] sm:text-xs tracking-widest text-[#C7B8A8]/60 uppercase">
-            EXPERTISE MULTIDISCIPLINAIRE · HAUTE EXIGENCE
+            {t.disciplines.subtitle}
           </p>
         </div>
 
@@ -59,7 +59,7 @@ export const DisciplinesSection: React.FC = () => {
               <div className="my-4 sm:my-6 relative overflow-hidden aspect-[16/10] bg-[#1a1715] border border-[#27272A]">
                 <img
                   src={item.image}
-                  alt={item.title.fr}
+                  alt={item.title[lang] || item.title.fr}
                   className="w-full h-full object-cover object-center filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                 />
                 <div className="absolute inset-0 bg-[#0B0B0B]/30 group-hover:bg-transparent transition-colors" />
@@ -68,10 +68,10 @@ export const DisciplinesSection: React.FC = () => {
               {/* Title & Description */}
               <div>
                 <h3 className="font-serif text-lg sm:text-xl text-[#F7F3EE] group-hover:text-[#B79A7E] transition-colors font-medium">
-                  {item.title.fr}
+                  {item.title[lang] || item.title.fr}
                 </h3>
                 <p className="text-xs text-[#C7B8A8] leading-relaxed mt-1.5 sm:mt-2 font-light line-clamp-3">
-                  {item.description.fr}
+                  {item.description[lang] || item.description.fr}
                 </p>
               </div>
             </div>

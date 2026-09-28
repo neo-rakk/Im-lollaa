@@ -4,7 +4,7 @@ import { Award, CheckCircle2 } from 'lucide-react';
 import { editorialAssets } from '../data/assets';
 
 export const IntroSection: React.FC = () => {
-  const { t, profile, stats, setCurrentView } = useApp();
+  const { t, lang, profile, stats, setCurrentView } = useApp();
 
   const mainStat = stats.find((s) => s.platform === 'Instagram') || stats[0];
 
@@ -36,7 +36,7 @@ export const IntroSection: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/80 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 flex items-center justify-between text-[11px] sm:text-xs tracking-widest text-[#E8DDD4]">
                 <span>KHAOULA KEBBACHE</span>
-                <span className="text-[#B79A7E]">PORTRAIT 01</span>
+                <span className="text-[#B79A7E]">{t.intro.portraitLabel}</span>
               </div>
             </div>
 
@@ -51,7 +51,7 @@ export const IntroSection: React.FC = () => {
                   {mainStat?.display_value || '+600K'}
                 </div>
                 <p className="text-[10px] sm:text-[11px] text-[#C7B8A8]/60 mt-0.5">
-                  Instagram @im_lollaa · Source vérifiée
+                  {t.intro.statsSubtext}
                 </p>
               </div>
 
@@ -59,7 +59,7 @@ export const IntroSection: React.FC = () => {
                 onClick={() => setCurrentView('media-kit')}
                 className="text-xs font-semibold tracking-wider text-[#B79A7E] hover:text-[#F7F3EE] underline decoration-[#B79A7E] underline-offset-4 self-start sm:self-center min-h-[40px] flex items-center"
               >
-                MEDIA KIT →
+                {t.nav.mediaKit} →
               </button>
             </div>
           </div>
@@ -82,7 +82,7 @@ export const IntroSection: React.FC = () => {
             <div className="pt-6 border-t border-[#27272A]/70">
               <div className="flex items-center gap-2 text-[11px] sm:text-xs font-semibold tracking-[0.16em] sm:tracking-[0.2em] uppercase text-[#B79A7E] mb-4 sm:mb-6">
                 <Award className="w-4 h-4 shrink-0" />
-                <span>FORMATIONS & DOMAINES D’EXCELLENCE CERTIFIÉS</span>
+                <span>{t.intro.credentialsTitle}</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
@@ -95,7 +95,7 @@ export const IntroSection: React.FC = () => {
                       0{index + 1}
                     </span>
                     <p className="text-xs sm:text-sm text-[#F7F3EE] font-medium mt-1.5 sm:mt-2">
-                      {item.fr}
+                      {item[lang] || item.fr}
                     </p>
                   </div>
                 ))}
@@ -108,7 +108,7 @@ export const IntroSection: React.FC = () => {
                 onClick={() => setCurrentView('about')}
                 className="inline-flex items-center gap-3 text-xs tracking-[0.18em] sm:tracking-[0.2em] uppercase text-[#F7F3EE] hover:text-[#B79A7E] font-semibold border-b border-[#B79A7E] pb-1 transition-colors min-h-[44px]"
               >
-                <span>LIRE LA BIOGRAPHIE COMPLÈTE & PARCOURS</span>
+                <span>{t.intro.readBioCta}</span>
                 <span>→</span>
               </button>
             </div>

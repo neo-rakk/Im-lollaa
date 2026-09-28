@@ -49,10 +49,10 @@ export const Footer: React.FC = () => {
               KHAOULA KEBBACHE
             </p>
             <p className="text-xs tracking-[0.18em] text-[#B79A7E] uppercase">
-              CREATOR · PRESENTER · BEAUTY · MEDIA
+              {t.hero.role}
             </p>
             <p className="text-xs text-[#C7B8A8]/70 max-w-sm font-light pt-2 leading-relaxed">
-              Plateforme numérique officielle et portfolio d’excellence de Lola (Khaoula Kebbache).
+              {t.footer.bioSummary}
             </p>
 
             {/* Anti-phishing trust badge */}
@@ -65,7 +65,7 @@ export const Footer: React.FC = () => {
           {/* Quick Nav Col (3 cols) */}
           <div className="lg:col-span-3 space-y-3">
             <p className="text-xs font-mono tracking-widest text-[#B79A7E] uppercase mb-4">
-              NAVIGATION
+              {t.footer.navigationTitle}
             </p>
             <ul className="space-y-2.5 text-xs text-[#C7B8A8]">
               <li>
@@ -138,7 +138,7 @@ export const Footer: React.FC = () => {
           {/* Social Presence Col (2 cols) */}
           <div className="lg:col-span-2 space-y-3">
             <p className="text-xs font-mono tracking-widest text-[#B79A7E] uppercase mb-4">
-              RÉSEAUX OFFICIELS
+              {t.footer.socialTitle}
             </p>
             <ul className="space-y-2.5 text-xs text-[#C7B8A8]">
               {socialAccounts.filter(s => s.is_public).map(acc => (
@@ -160,7 +160,7 @@ export const Footer: React.FC = () => {
           <div className="lg:col-span-2 space-y-4 flex flex-col justify-between">
             <div>
               <p className="text-xs font-mono tracking-widest text-[#B79A7E] uppercase mb-4">
-                LANGUES
+                {t.footer.languagesTitle}
               </p>
               <div className="flex items-center gap-3 text-xs">
                 {languages.map((l) => (
@@ -183,7 +183,7 @@ export const Footer: React.FC = () => {
               onClick={scrollToTop}
               className="inline-flex items-center gap-2 text-xs text-[#C7B8A8] hover:text-[#F7F3EE] tracking-widest uppercase transition-colors"
             >
-              <span>HAUT DE PAGE</span>
+              <span>{t.footer.backToTop}</span>
               <ArrowUp className="w-3.5 h-3.5 text-[#B79A7E]" />
             </button>
           </div>

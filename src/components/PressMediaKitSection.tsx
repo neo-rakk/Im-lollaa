@@ -21,7 +21,7 @@ export const PressMediaKitSection: React.FC = () => {
             </h2>
           </div>
           <p className="text-[11px] sm:text-xs tracking-widest text-[#C7B8A8]/70 uppercase">
-            RESSOURCES JOURNALISTES & PROFESSIONNELS
+            {t.press.subtitle}
           </p>
         </div>
 
@@ -33,17 +33,17 @@ export const PressMediaKitSection: React.FC = () => {
             <div className="space-y-4 sm:space-y-6">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] sm:text-[11px] font-mono tracking-widest text-[#B79A7E] uppercase">
-                  DOCUMENT OFFICIEL · ÉDITION 2026
+                  {t.press.card1Badge}
                 </span>
-                <span className="text-[10px] sm:text-[11px] text-[#C7B8A8] font-mono">PDF EXPORTABLE</span>
+                <span className="text-[10px] sm:text-[11px] text-[#C7B8A8] font-mono">{t.press.card1Format}</span>
               </div>
 
               <h3 className="font-serif text-2xl sm:text-3xl text-[#F7F3EE] font-medium">
-                Official Media Kit
+                {t.press.card1Title}
               </h3>
 
               <p className="text-xs sm:text-sm text-[#C7B8A8] font-light leading-relaxed">
-                Synthèse complète pour marques et agences : données démographiques, engagements vérifiés, formats de collaboration, réalisations audiovisuelles et conditions techniques.
+                {t.press.card1Desc}
               </p>
 
               {/* Verified Audience highlights */}
@@ -77,31 +77,31 @@ export const PressMediaKitSection: React.FC = () => {
             <div className="space-y-4 sm:space-y-6">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] sm:text-[11px] font-mono tracking-widest text-[#B79A7E] uppercase">
-                  SALLE DE PRESSE & MÉDIAS
+                  {t.press.card2Badge}
                 </span>
-                <span className="text-[10px] sm:text-[11px] text-[#C7B8A8] font-mono">KIT OFFICIEL</span>
+                <span className="text-[10px] sm:text-[11px] text-[#C7B8A8] font-mono">{t.press.card2Format}</span>
               </div>
 
               <h3 className="font-serif text-2xl sm:text-3xl text-[#F7F3EE] font-medium">
-                Press Pack & Interviews
+                {t.press.card2Title}
               </h3>
 
               <p className="text-xs sm:text-sm text-[#C7B8A8] font-light leading-relaxed">
-                Portraits officiels haute définition libres de droit presse, éléments biographiques validés par le management, et formulaire direct de demande d’interview.
+                {t.press.card2Desc}
               </p>
 
               <div className="space-y-2 py-3 sm:py-4 border-y border-[#27272A]/80 text-xs text-[#E8DDD4]">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-3.5 h-3.5 text-[#B79A7E] shrink-0" />
-                  <span>Portraits studio HD & visuels de tournage</span>
+                  <span>{t.press.feature1}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-3.5 h-3.5 text-[#B79A7E] shrink-0" />
-                  <span>Biographie officielle trilingue (FR / AR / EN)</span>
+                  <span>{t.press.feature2}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-3.5 h-3.5 text-[#B79A7E] shrink-0" />
-                  <span>Fiche technique et historique TV</span>
+                  <span>{t.press.feature3}</span>
                 </div>
               </div>
             </div>
@@ -111,7 +111,7 @@ export const PressMediaKitSection: React.FC = () => {
                 onClick={() => setCurrentView('press')}
                 className="w-full inline-flex items-center justify-center gap-3 px-6 py-3.5 sm:py-4 border border-[#C7B8A8]/40 text-[#F7F3EE] text-xs font-semibold tracking-[0.18em] uppercase hover:bg-[#F7F3EE]/10 hover:border-[#F7F3EE] transition-colors min-h-[48px]"
               >
-                <span>ACCÉDER À L’ESPACE PRESSE</span>
+                <span>{t.press.accessPressBtn}</span>
                 <ArrowUpRight className="w-4 h-4 text-[#B79A7E]" />
               </button>
             </div>

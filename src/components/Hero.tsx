@@ -50,13 +50,12 @@ export const Hero: React.FC = () => {
 
           {/* Disciplines Kicker */}
           <div className="mt-5 sm:mt-8 flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-1 sm:gap-y-2 text-[11px] sm:text-sm md:text-base tracking-[0.16em] sm:tracking-[0.2em] font-medium text-[#E8DDD4]/90 uppercase">
-            <span>CREATOR</span>
-            <span className="text-[#B79A7E]" aria-hidden="true">·</span>
-            <span>PRESENTER</span>
-            <span className="text-[#B79A7E]" aria-hidden="true">·</span>
-            <span>BEAUTY</span>
-            <span className="text-[#B79A7E]" aria-hidden="true">·</span>
-            <span>MEDIA</span>
+            {t.hero.roleItems.map((roleItem, idx) => (
+              <React.Fragment key={idx}>
+                {idx > 0 && <span className="text-[#B79A7E]" aria-hidden="true">·</span>}
+                <span>{roleItem}</span>
+              </React.Fragment>
+            ))}
           </div>
 
           {/* Action CTAs */}
@@ -85,7 +84,7 @@ export const Hero: React.FC = () => {
         <div className="flex items-center gap-3 sm:gap-4">
           <span className="text-[#B79A7E] font-mono">im-lolla.com</span>
           <span aria-hidden="true">·</span>
-          <span>OFFICIAL DIGITAL PRESENCE</span>
+          <span>{t.hero.officialSite}</span>
         </div>
 
         <button

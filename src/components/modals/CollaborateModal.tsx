@@ -11,11 +11,11 @@ export const CollaborateModal: React.FC = () => {
     email: '',
     phone: '',
     country: '',
-    projectType: 'Brand Ambassador',
+    projectType: t.collaborate.types[0] || 'Ambassador',
     description: '',
     deliverables: '',
     desiredDate: '',
-    budgetRange: '25 000 € – 50 000 €',
+    budgetRange: t.collaborate.budgets[2] || '',
     website: '',
     socialUrl: '',
     attachmentName: '',
@@ -27,33 +27,11 @@ export const CollaborateModal: React.FC = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const projectTypes = [
-    'Brand Ambassador',
-    'Brand Campaign',
-    'Product Launch',
-    'Beauty Campaign',
-    'UGC & Social Content',
-    'TV / Media Production',
-    'Event Hosting & Ceremonies',
-    'Editorial Haute Couture',
-    'Autre collaboration'
-  ];
-
-  const budgetRanges = [
-    'Moins de 10 000 €',
-    '10 000 € – 25 000 €',
-    '25 000 € – 50 000 €',
-    '50 000 € – 100 000 €',
-    'Plus de 100 000 €',
-    'Budget sur devis / À définir'
-  ];
-
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
-      // File validation: PDF, DOCX, PPTX, JPG, PNG, max 10MB
       if (file.size > 10 * 1024 * 1024) {
-        setError('Le fichier dépasse la taille maximale autorisée (10 Mo).');
+        setError(t.collaborate.errors.fileSize);
         return;
       }
       setFormData({ ...formData, attachmentName: file.name });
@@ -64,7 +42,7 @@ export const CollaborateModal: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.consent) {
-      setError('Veuillez accepter l’attestation professionnelle pour transmettre votre demande.');
+      setError(t.collaborate.errors.consent);
       return;
     }
     setIsSubmitting(true);
@@ -91,7 +69,7 @@ export const CollaborateModal: React.FC = () => {
     if (res.success) {
       setSuccess(true);
     } else {
-      setError(res.error || 'Une erreur est survenue lors de l’enregistrement de votre dossier.');
+      setError(res.error || t.collaborate.errors.required);
     }
   };
 
@@ -103,7 +81,7 @@ export const CollaborateModal: React.FC = () => {
         <button
           onClick={() => setCurrentView('home')}
           className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2.5 text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A] hover:border-[#B79A7E] transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center z-10 bg-[#141210]/80 sm:bg-transparent"
-          aria-label="Fermer"
+          aria-label={t.nav.close}
         >
           <X className="w-5 h-5" />
         </button>
@@ -122,7 +100,7 @@ export const CollaborateModal: React.FC = () => {
                 onClick={() => setCurrentView('home')}
                 className="px-8 py-3.5 bg-[#F7F3EE] text-[#0B0B0B] text-xs font-semibold tracking-[0.2em] uppercase hover:bg-[#B79A7E] hover:text-white transition-colors"
               >
-                RETOUR AU SITE PRINCIPAL
+                {t.collaborate.returnHome}
               </button>
             </div>
           </div>
@@ -131,13 +109,13 @@ export const CollaborateModal: React.FC = () => {
             {/* Header */}
             <div className="mb-8 pr-12">
               <span className="text-[11px] font-mono tracking-widest text-[#B79A7E] uppercase">
-                FORMULAIRE INSTITUTIONNEL & MARQUES
+                {t.collaborate.kicker}
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl text-[#F7F3EE] font-light mt-1">
                 {t.collaborate.modalTitle}
               </h2>
               <p className="text-xs sm:text-sm text-[#C7B8A8] mt-2 font-light">
-                Chaque proposition est analysée avec rigueur par l’équipe de direction de Lola.
+                {t.collaborate.modalSubtitle}
               </p>
             </div>
 
@@ -173,7 +151,6 @@ export const CollaborateModal: React.FC = () => {
                     value={formData.companyName}
                     onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
                     className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-4 py-3 text-[#F7F3EE]"
-                    placeholder="ex: L'Oréal, Dior, Maison de Mode..."
                   />
                 </div>
 
@@ -187,7 +164,6 @@ export const CollaborateModal: React.FC = () => {
                     value={formData.contactName}
                     onChange={(e) => setFormData({ ...formData, contactName: e.target.value })}
                     className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-4 py-3 text-[#F7F3EE]"
-                    placeholder="Nom du responsable marketing / production"
                   />
                 </div>
               </div>
@@ -204,7 +180,6 @@ export const CollaborateModal: React.FC = () => {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-4 py-3 text-[#F7F3EE]"
-                    placeholder="contact@votre-entreprise.com"
                   />
                 </div>
 
@@ -217,7 +192,6 @@ export const CollaborateModal: React.FC = () => {
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-4 py-3 text-[#F7F3EE]"
-                    placeholder="+33 1 ... / +213 ..."
                   />
                 </div>
 
@@ -231,7 +205,6 @@ export const CollaborateModal: React.FC = () => {
                     value={formData.country}
                     onChange={(e) => setFormData({ ...formData, country: e.target.value })}
                     className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-4 py-3 text-[#F7F3EE]"
-                    placeholder="France, Algérie, Émirats..."
                   />
                 </div>
               </div>
@@ -247,7 +220,7 @@ export const CollaborateModal: React.FC = () => {
                     onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
                     className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-4 py-3 text-[#F7F3EE]"
                   >
-                    {projectTypes.map((pt) => (
+                    {t.collaborate.types.map((pt) => (
                       <option key={pt} value={pt}>{pt}</option>
                     ))}
                   </select>
@@ -262,7 +235,7 @@ export const CollaborateModal: React.FC = () => {
                     onChange={(e) => setFormData({ ...formData, budgetRange: e.target.value })}
                     className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-4 py-3 text-[#F7F3EE]"
                   >
-                    {budgetRanges.map((br) => (
+                    {t.collaborate.budgets.map((br) => (
                       <option key={br} value={br}>{br}</option>
                     ))}
                   </select>
@@ -281,7 +254,6 @@ export const CollaborateModal: React.FC = () => {
                     value={formData.deliverables}
                     onChange={(e) => setFormData({ ...formData, deliverables: e.target.value })}
                     className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-4 py-3 text-[#F7F3EE]"
-                    placeholder="ex: Vidéo TV, Posts, Événement VIP, Shooting"
                   />
                 </div>
 
@@ -294,7 +266,6 @@ export const CollaborateModal: React.FC = () => {
                     value={formData.desiredDate}
                     onChange={(e) => setFormData({ ...formData, desiredDate: e.target.value })}
                     className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-4 py-3 text-[#F7F3EE]"
-                    placeholder="ex: Q4 2026, Mois de Novembre..."
                   />
                 </div>
               </div>
@@ -310,7 +281,6 @@ export const CollaborateModal: React.FC = () => {
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-4 py-3 text-[#F7F3EE]"
-                  placeholder="Détaillez le synopsis de votre projet, vos objectifs de marque et la vision que vous souhaitez développer avec Lola..."
                 />
               </div>
 
@@ -335,7 +305,7 @@ export const CollaborateModal: React.FC = () => {
                     ) : (
                       <>
                         <UploadCloud className="w-4 h-4 text-[#B79A7E]" />
-                        <span>Cliquez pour sélectionner votre fichier brief (PDF, DOCX, max 10 Mo)</span>
+                        <span>PDF, DOCX (max 10 Mo)</span>
                       </>
                     )}
                   </div>
@@ -361,7 +331,7 @@ export const CollaborateModal: React.FC = () => {
               <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
                 <div className="flex items-center gap-2 text-[11px] text-[#C7B8A8]/60">
                   <ShieldCheck className="w-3.5 h-3.5 text-[#B79A7E] shrink-0" />
-                  <span>Dossier chiffré & confidentiel</span>
+                  <span>{t.collaborate.confidentialNotice}</span>
                 </div>
 
                 <button
@@ -370,7 +340,7 @@ export const CollaborateModal: React.FC = () => {
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#F7F3EE] text-[#0B0B0B] text-xs font-semibold tracking-[0.2em] uppercase hover:bg-[#B79A7E] hover:text-white transition-all disabled:opacity-50 min-h-[48px]"
                 >
                   <Send className="w-3.5 h-3.5" />
-                  <span>{isSubmitting ? 'ENREGISTREMENT...' : t.collaborate.submit}</span>
+                  <span>{isSubmitting ? t.collaborate.submitting : t.collaborate.submit}</span>
                 </button>
               </div>
 

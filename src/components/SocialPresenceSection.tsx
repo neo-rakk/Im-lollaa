@@ -70,7 +70,7 @@ export const SocialPresenceSection: React.FC = () => {
 
                 {account.platform === 'instagram' && instagramStat && (
                   <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-[#27272A]/40 flex items-center justify-between text-xs">
-                    <span className="text-[#C7B8A8]/70 text-[11px]">Audience vérifiée :</span>
+                    <span className="text-[#C7B8A8]/70 text-[11px]">{t.social.audienceLabel}</span>
                     <span className="font-serif text-lg text-[#F7F3EE] font-bold">
                       {instagramStat.display_value}
                     </span>
@@ -79,7 +79,7 @@ export const SocialPresenceSection: React.FC = () => {
               </div>
 
               <div className="flex items-center justify-between text-xs tracking-wider text-[#C7B8A8] group-hover:text-[#F7F3EE] transition-colors pt-2 min-h-[36px]">
-                <span className="text-[11px] sm:text-xs">REJOINDRE LE COMPTE OFFICIEL</span>
+                <span className="text-[11px] sm:text-xs">{t.social.joinOfficialAccount}</span>
                 <ExternalLink className="w-3.5 h-3.5 text-[#B79A7E]" />
               </div>
             </a>

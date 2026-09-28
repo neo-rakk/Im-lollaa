@@ -3,7 +3,7 @@ import { useApp } from '../context/AppContext';
 import { Camera, Maximize2, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export const GallerySection: React.FC = () => {
-  const { t, gallery, activeLightboxIndex, setActiveLightboxIndex } = useApp();
+  const { t, lang, gallery, activeLightboxIndex, setActiveLightboxIndex } = useApp();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   const categories = [
@@ -67,7 +67,7 @@ export const GallerySection: React.FC = () => {
             </h2>
           </div>
           <p className="text-[11px] sm:text-xs tracking-widest text-[#C7B8A8]/70 uppercase">
-            ARCHIVES PHOTOGRAPHIQUES OFFICIELLES
+            {t.gallery.subtitle}
           </p>
         </div>
 
@@ -98,7 +98,7 @@ export const GallerySection: React.FC = () => {
             >
               <img
                 src={item.imageUrl}
-                alt={item.altText.fr}
+                alt={item.altText[lang] || item.altText.fr}
                 className="w-full h-full object-cover object-center filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                 loading="lazy"
               />
@@ -114,10 +114,10 @@ export const GallerySection: React.FC = () => {
 
                 <div>
                   <span className="text-[9px] sm:text-[10px] font-mono tracking-widest text-[#B79A7E] uppercase">
-                    {item.category}
+                    {t.gallery[item.category as keyof typeof t.gallery] || item.category}
                   </span>
                   <h3 className="font-serif text-base sm:text-lg text-[#F7F3EE] font-medium leading-snug mt-1">
-                    {item.title.fr}
+                    {item.title[lang] || item.title.fr}
                   </h3>
                   <p className="text-[10px] sm:text-[11px] text-[#C7B8A8]/80 mt-1">
                     {item.credit} · {item.date}
@@ -137,17 +137,17 @@ export const GallerySection: React.FC = () => {
           <div className="flex items-center justify-between border-b border-[#27272A] pb-3 sm:pb-4">
             <div className="pr-4">
               <p className="text-[10px] sm:text-[11px] font-mono tracking-widest text-[#B79A7E] uppercase">
-                {filteredItems[activeLightboxIndex].category} · {activeLightboxIndex + 1} / {filteredItems.length}
+                {t.gallery[filteredItems[activeLightboxIndex].category as keyof typeof t.gallery] || filteredItems[activeLightboxIndex].category} · {activeLightboxIndex + 1} / {filteredItems.length}
               </p>
               <h4 className="font-serif text-base sm:text-lg text-[#F7F3EE] truncate max-w-xs sm:max-w-md">
-                {filteredItems[activeLightboxIndex].title.fr}
+                {filteredItems[activeLightboxIndex].title[lang] || filteredItems[activeLightboxIndex].title.fr}
               </h4>
             </div>
 
             <button
               onClick={closeLightbox}
               className="p-2.5 sm:p-3 text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A] hover:border-[#B79A7E] transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
-              aria-label="Fermer la vue (Échap)"
+              aria-label={t.gallery.close}
             >
               <X className="w-5 h-5" />
             </button>
@@ -158,21 +158,21 @@ export const GallerySection: React.FC = () => {
             <button
               onClick={prevImage}
               className="absolute left-2 sm:left-4 p-2.5 sm:p-3 bg-[#141210]/90 text-[#F7F3EE] border border-[#27272A] hover:border-[#B79A7E] transition-colors z-10 min-h-[44px] min-w-[44px] flex items-center justify-center"
-              aria-label="Photo précédente"
+              aria-label={t.gallery.prev}
             >
               <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
 
             <img
               src={filteredItems[activeLightboxIndex].imageUrl}
-              alt={filteredItems[activeLightboxIndex].altText.fr}
+              alt={filteredItems[activeLightboxIndex].altText[lang] || filteredItems[activeLightboxIndex].altText.fr}
               className="max-h-[68vh] sm:max-h-[78vh] max-w-full object-contain select-none"
             />
 
             <button
               onClick={nextImage}
               className="absolute right-2 sm:right-4 p-2.5 sm:p-3 bg-[#141210]/90 text-[#F7F3EE] border border-[#27272A] hover:border-[#B79A7E] transition-colors z-10 min-h-[44px] min-w-[44px] flex items-center justify-center"
-              aria-label="Photo suivante"
+              aria-label={t.gallery.next}
             >
               <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
@@ -181,7 +181,7 @@ export const GallerySection: React.FC = () => {
           {/* Bottom metadata */}
           <div className="border-t border-[#27272A] pt-3 sm:pt-4 flex flex-col sm:flex-row items-center justify-between text-[11px] sm:text-xs text-[#C7B8A8] gap-1 sm:gap-4 text-center sm:text-left">
             <p>{filteredItems[activeLightboxIndex].credit} — {filteredItems[activeLightboxIndex].copyright}</p>
-            <p className="text-[10px] sm:text-[11px] font-mono">{filteredItems[activeLightboxIndex].altText.fr}</p>
+            <p className="text-[10px] sm:text-[11px] font-mono">{filteredItems[activeLightboxIndex].altText[lang] || filteredItems[activeLightboxIndex].altText.fr}</p>
           </div>
         </div>
       )}

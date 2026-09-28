@@ -1,10 +1,10 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
-import { X, Printer, CheckCircle, Award, Tv, Sparkles, Instagram } from 'lucide-react';
+import { X, Printer, CheckCircle, Award, Tv, Instagram } from 'lucide-react';
 import { editorialAssets } from '../../data/assets';
 
 export const MediaKitModal: React.FC = () => {
-  const { setCurrentView, profile, stats } = useApp();
+  const { setCurrentView, profile, stats, t, lang } = useApp();
 
   const handlePrint = () => {
     window.print();
@@ -19,7 +19,7 @@ export const MediaKitModal: React.FC = () => {
         {/* Header Controls */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-[#27272A] mb-8 gap-4 print:hidden">
           <div className="flex items-center gap-2 text-xs font-mono text-[#B79A7E] tracking-widest uppercase">
-            <span>OFFICIAL MEDIA KIT · 2026 EDITION</span>
+            <span>{t.modals.mediaKit.badge}</span>
           </div>
 
           <div className="flex items-center gap-3 self-end sm:self-auto">
@@ -28,14 +28,14 @@ export const MediaKitModal: React.FC = () => {
               className="inline-flex items-center gap-2 px-4 py-2 border border-[#27272A] hover:border-[#B79A7E] text-xs font-medium tracking-wider uppercase transition-colors min-h-[44px]"
             >
               <Printer className="w-3.5 h-3.5 text-[#B79A7E]" />
-              <span className="hidden sm:inline">IMPRIMER / EXPORTER (PDF)</span>
+              <span className="hidden sm:inline">{t.modals.mediaKit.printBtn}</span>
               <span className="sm:hidden">PDF</span>
             </button>
 
             <button
               onClick={() => setCurrentView('home')}
               className="p-2.5 text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A] hover:border-[#B79A7E] transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
-              aria-label="Fermer"
+              aria-label={t.nav.close}
             >
               <X className="w-5 h-5" />
             </button>
@@ -59,20 +59,20 @@ export const MediaKitModal: React.FC = () => {
 
             <div className="md:col-span-8 space-y-4">
               <span className="text-xs font-mono tracking-[0.3em] text-[#B79A7E] uppercase">
-                PORTFOLIO & MEDIA KIT OFFICIEL
+                {t.modals.mediaKit.badge}
               </span>
               <h1 className="font-serif text-5xl sm:text-6xl text-[#F7F3EE] tracking-tight font-light print:text-black">
-                LOLA
+                {t.modals.mediaKit.title}
               </h1>
               <p className="text-sm font-mono tracking-widest text-[#C7B8A8] uppercase print:text-neutral-700">
-                KHAOULA KEBBACHE
+                {t.modals.mediaKit.subtitle}
               </p>
               <p className="text-xs tracking-[0.2em] text-[#B79A7E] uppercase font-semibold">
-                CREATOR · PRESENTER · BEAUTY · MEDIA
+                {t.modals.mediaKit.role}
               </p>
 
               <p className="text-xs sm:text-sm text-[#C7B8A8] leading-relaxed font-light pt-2 print:text-neutral-800">
-                {profile.short_bio.fr}
+                {profile.short_bio[lang] || profile.short_bio.fr}
               </p>
             </div>
           </div>
@@ -82,47 +82,47 @@ export const MediaKitModal: React.FC = () => {
             <div className="p-6 border border-[#27272A] bg-[#141210] print:border-neutral-300 print:bg-neutral-50 text-center">
               <div className="flex items-center justify-center gap-1.5 text-xs text-[#B79A7E] font-mono uppercase mb-1">
                 <Instagram className="w-3.5 h-3.5" />
-                <span>INSTAGRAM OFFICIEL</span>
+                <span>{t.modals.mediaKit.statsInsta}</span>
               </div>
               <div className="font-serif text-3xl font-bold text-[#F7F3EE] print:text-black">
                 {instagramStat.display_value}
               </div>
-              <p className="text-[10px] text-[#C7B8A8] font-mono mt-1">@im_lollaa · Certifié</p>
+              <p className="text-[10px] text-[#C7B8A8] font-mono mt-1">@im_lollaa · {t.social.verified}</p>
             </div>
 
             <div className="p-6 border border-[#27272A] bg-[#141210] print:border-neutral-300 print:bg-neutral-50 text-center">
               <div className="flex items-center justify-center gap-1.5 text-xs text-[#B79A7E] font-mono uppercase mb-1">
                 <Tv className="w-3.5 h-3.5" />
-                <span>AUDIOVISUEL</span>
+                <span>{t.modals.mediaKit.statsTv}</span>
               </div>
               <div className="font-serif text-3xl font-bold text-[#F7F3EE] print:text-black">
-                Prime Time
+                {t.modals.mediaKit.statsTvValue}
               </div>
-              <p className="text-[10px] text-[#C7B8A8] font-mono mt-1">Présentatrice TV Officielle</p>
+              <p className="text-[10px] text-[#C7B8A8] font-mono mt-1">{t.modals.mediaKit.statsTvSub}</p>
             </div>
 
             <div className="p-6 border border-[#27272A] bg-[#141210] print:border-neutral-300 print:bg-neutral-50 text-center">
               <div className="flex items-center justify-center gap-1.5 text-xs text-[#B79A7E] font-mono uppercase mb-1">
                 <Award className="w-3.5 h-3.5" />
-                <span>EXPERTISE</span>
+                <span>{t.modals.mediaKit.statsCosmetics}</span>
               </div>
               <div className="font-serif text-3xl font-bold text-[#F7F3EE] print:text-black">
-                Diplômée
+                {t.modals.mediaKit.statsCosmeticsValue}
               </div>
-              <p className="text-[10px] text-[#C7B8A8] font-mono mt-1">Cosmétologie & Parfumerie</p>
+              <p className="text-[10px] text-[#C7B8A8] font-mono mt-1">{t.modals.mediaKit.statsCosmeticsSub}</p>
             </div>
           </div>
 
           {/* Formations & Qualifications */}
           <div className="space-y-4 pt-6 border-t border-[#27272A]">
             <h3 className="font-serif text-2xl text-[#F7F3EE] font-medium print:text-black">
-              Qualifications & Expertises Techniques
+              {t.modals.mediaKit.qualificationsTitle}
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-[#C7B8A8]">
               {profile.education.map((ed, idx) => (
                 <div key={idx} className="flex items-center gap-2 p-3 bg-[#141210] border border-[#27272A] print:border-neutral-300 print:bg-neutral-50">
                   <CheckCircle className="w-4 h-4 text-[#B79A7E] shrink-0" />
-                  <span className="print:text-black">{ed.fr}</span>
+                  <span className="print:text-black">{ed[lang] || ed.fr}</span>
                 </div>
               ))}
             </div>
@@ -131,33 +131,33 @@ export const MediaKitModal: React.FC = () => {
           {/* Collaboration packages */}
           <div className="space-y-4 pt-6 border-t border-[#27272A]">
             <h3 className="font-serif text-2xl text-[#F7F3EE] font-medium print:text-black">
-              Formats de Collaboration Disponibles
+              {t.modals.mediaKit.formatsTitle}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
               <div className="p-5 border border-[#27272A] bg-[#141210] print:border-neutral-300 print:bg-neutral-50 space-y-2">
-                <span className="text-[10px] font-mono text-[#B79A7E] uppercase">FORMAT 01</span>
-                <h4 className="font-semibold text-[#F7F3EE] print:text-black">Égérie & Ambassadrice</h4>
-                <p className="text-[#C7B8A8] print:text-neutral-700">Contrat annuel, campagnes 360°, shootings officiels et présence salon de prestige.</p>
+                <span className="text-[10px] font-mono text-[#B79A7E] uppercase">01</span>
+                <h4 className="font-semibold text-[#F7F3EE] print:text-black">{t.modals.mediaKit.format1Title}</h4>
+                <p className="text-[#C7B8A8] print:text-neutral-700">{t.modals.mediaKit.format1Desc}</p>
               </div>
 
               <div className="p-5 border border-[#27272A] bg-[#141210] print:border-neutral-300 print:bg-neutral-50 space-y-2">
-                <span className="text-[10px] font-mono text-[#B79A7E] uppercase">FORMAT 02</span>
-                <h4 className="font-semibold text-[#F7F3EE] print:text-black">Télévision & Événements</h4>
-                <p className="text-[#C7B8A8] print:text-neutral-700">Animation de galas, présentations de défilés de mode, couverture tapis rouge et festivals.</p>
+                <span className="text-[10px] font-mono text-[#B79A7E] uppercase">02</span>
+                <h4 className="font-semibold text-[#F7F3EE] print:text-black">{t.modals.mediaKit.format2Title}</h4>
+                <p className="text-[#C7B8A8] print:text-neutral-700">{t.modals.mediaKit.format2Desc}</p>
               </div>
 
               <div className="p-5 border border-[#27272A] bg-[#141210] print:border-neutral-300 print:bg-neutral-50 space-y-2">
-                <span className="text-[10px] font-mono text-[#B79A7E] uppercase">FORMAT 03</span>
-                <h4 className="font-semibold text-[#F7F3EE] print:text-black">Campagnes Beauté & Soins</h4>
-                <p className="text-[#C7B8A8] print:text-neutral-700">Mise en valeur d'actifs cosmétologiques, tutoriels experts et lancements exclusifs.</p>
+                <span className="text-[10px] font-mono text-[#B79A7E] uppercase">03</span>
+                <h4 className="font-semibold text-[#F7F3EE] print:text-black">{t.modals.mediaKit.format3Title}</h4>
+                <p className="text-[#C7B8A8] print:text-neutral-700">{t.modals.mediaKit.format3Desc}</p>
               </div>
             </div>
           </div>
 
           {/* Contact footer */}
           <div className="pt-6 border-t border-[#27272A] flex flex-col sm:flex-row items-center justify-between text-xs text-[#C7B8A8]">
-            <p>Management officiel : <span className="text-[#F7F3EE] font-mono font-medium">collab@im-lolla.com</span></p>
-            <p className="font-mono">im-lolla.com · Confidentiel</p>
+            <p>im-lolla.com · collab@im-lolla.com</p>
+            <p className="font-mono">{t.footer.domainNotice}</p>
           </div>
 
         </div>

@@ -5,15 +5,6 @@ import { Briefcase, ArrowUpRight, ShieldCheck, Mail } from 'lucide-react';
 export const CollaborateSection: React.FC = () => {
   const { t, setCurrentView } = useApp();
 
-  const collaborationTypes = [
-    'Brand Ambassador',
-    'Beauty & Cosmetics Campaign',
-    'Product Launch',
-    'TV & Media Production',
-    'Event Hosting & Ceremonies',
-    'Editorial & Haute Couture'
-  ];
-
   return (
     <section id="collaborate-section" className="py-16 sm:py-24 md:py-32 bg-[#0B0B0B] text-[#F7F3EE] border-b border-[#27272A]/50 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -40,11 +31,11 @@ export const CollaborateSection: React.FC = () => {
             {/* Collaboration formats list */}
             <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-[#27272A]/80">
               <p className="text-[10px] sm:text-xs font-mono tracking-widest text-[#B79A7E] uppercase mb-3 sm:mb-4">
-                FORMATS D’INTERVENTION PROPOSÉS
+                {t.collaborate.formatsTitle}
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 text-xs text-[#E8DDD4]">
-                {collaborationTypes.map((type, idx) => (
+                {t.collaborate.formatsList.map((type, idx) => (
                   <div key={idx} className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#B79A7E] shrink-0" />
                     <span>{type}</span>
@@ -67,14 +58,14 @@ export const CollaborateSection: React.FC = () => {
                 onClick={() => setCurrentView('media-kit')}
                 className="inline-flex items-center justify-center gap-3 px-5 sm:px-6 py-3.5 sm:py-4 border border-[#27272A] text-[#C7B8A8] hover:text-[#F7F3EE] hover:border-[#B79A7E] text-xs font-medium tracking-[0.16em] uppercase transition-colors min-h-[48px]"
               >
-                <span>CONSULTER LE MEDIA KIT</span>
+                <span>{t.collaborate.consultMediaKit}</span>
               </button>
             </div>
 
             {/* Official domain notice */}
             <div className="mt-6 sm:mt-8 flex items-center gap-2 text-[10px] sm:text-[11px] text-[#C7B8A8]/60">
               <ShieldCheck className="w-3.5 h-3.5 text-[#B79A7E] shrink-0" />
-              <span>Demandes traitées exclusivement sous protocole confidentiel par le management de Lola.</span>
+              <span>{t.collaborate.confidentialNotice}</span>
             </div>
 
           </div>

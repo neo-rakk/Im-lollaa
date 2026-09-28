@@ -4,7 +4,7 @@ import { Sparkles, Clock, ArrowRight } from 'lucide-react';
 import { BeautyArticle } from '../types';
 
 export const BeautyEditSection: React.FC = () => {
-  const { t, beautyArticles, setSelectedArticle, setCurrentView } = useApp();
+  const { t, lang, beautyArticles, setSelectedArticle, setCurrentView } = useApp();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   const categories = [
@@ -73,14 +73,14 @@ export const BeautyEditSection: React.FC = () => {
               <div className="relative overflow-hidden aspect-[16/10] bg-[#1a1715]">
                 <img
                   src={article.coverImage}
-                  alt={article.title.fr}
+                  alt={article.title[lang] || article.title.fr}
                   className="w-full h-full object-cover object-center filter grayscale group-hover:grayscale-0 group-hover:scale-103 transition-all duration-700"
                 />
                 <div className="absolute inset-0 bg-[#0B0B0B]/20 group-hover:bg-transparent transition-colors" />
                 
                 {/* Clean unboxed category kicker overlay */}
                 <div className="absolute top-3 sm:top-4 left-3 sm:left-4 text-[9px] sm:text-[10px] tracking-widest font-mono text-[#F7F3EE] uppercase bg-[#0B0B0B]/80 px-2 py-1">
-                  {article.category}
+                  {t.beauty.categories[article.category as keyof typeof t.beauty.categories] || article.category}
                 </div>
               </div>
 
@@ -91,18 +91,18 @@ export const BeautyEditSection: React.FC = () => {
                   <div className="flex items-center gap-2 text-xs text-[#C7B8A8]/70 mb-2.5 sm:mb-3">
                     <span className="flex items-center gap-1 font-mono text-[10px] sm:text-[11px]">
                       <Clock className="w-3 h-3 text-[#B79A7E]" />
-                      {article.readTime.fr}
+                      {article.readTime[lang] || article.readTime.fr}
                     </span>
                     <span aria-hidden="true">·</span>
                     <span className="font-mono text-[10px] sm:text-[11px]">{article.publishedAt}</span>
                   </div>
 
                   <h3 className="font-serif text-xl sm:text-2xl text-[#F7F3EE] group-hover:text-[#B79A7E] transition-colors font-medium leading-snug">
-                    {article.title.fr}
+                    {article.title[lang] || article.title.fr}
                   </h3>
 
                   <p className="text-xs sm:text-sm text-[#C7B8A8] mt-2.5 sm:mt-3 font-light leading-relaxed line-clamp-3">
-                    {article.excerpt.fr}
+                    {article.excerpt[lang] || article.excerpt.fr}
                   </p>
                 </div>
 

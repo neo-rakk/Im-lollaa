@@ -4,7 +4,7 @@ import { Tv, Play, ArrowUpRight } from 'lucide-react';
 import { editorialAssets } from '../data/assets';
 
 export const OnAirSection: React.FC = () => {
-  const { t, tvProjects, setSelectedTvProject, setCurrentView } = useApp();
+  const { t, lang, tvProjects, setSelectedTvProject, setCurrentView } = useApp();
 
   const primaryShow = tvProjects[0];
 
@@ -55,7 +55,7 @@ export const OnAirSection: React.FC = () => {
 
               <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs tracking-wider text-[#E8DDD4]">
                 <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse" />
-                <span className="font-mono text-[10px] sm:text-[11px] uppercase">BROADCAST ARCHIVE</span>
+                <span className="font-mono text-[10px] sm:text-[11px] uppercase">{t.onAir.tagArchive}</span>
               </div>
             </div>
 
@@ -64,10 +64,10 @@ export const OnAirSection: React.FC = () => {
               <div className="space-y-4 sm:space-y-6">
                 <div>
                   <span className="text-[10px] sm:text-[11px] font-mono tracking-widest text-[#B79A7E] uppercase">
-                    PROJET AUDIOVISUEL MAJEUR
+                    {t.onAir.tagFeatured}
                   </span>
                   <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-[#F7F3EE] font-medium tracking-tight mt-1">
-                    {primaryShow.title.fr}
+                    {primaryShow.title[lang] || primaryShow.title.fr}
                   </h3>
                 </div>
 
@@ -75,7 +75,7 @@ export const OnAirSection: React.FC = () => {
                 <div className="space-y-2.5 sm:space-y-3 py-3 sm:py-4 border-y border-[#27272A]/70 text-xs">
                   <div className="flex justify-between items-center text-[#C7B8A8]">
                     <span className="tracking-wider uppercase">{t.onAir.roleLabel}</span>
-                    <span className="text-[#F7F3EE] font-medium">{primaryShow.role.fr}</span>
+                    <span className="text-[#F7F3EE] font-medium">{primaryShow.role[lang] || primaryShow.role.fr}</span>
                   </div>
                   <div className="flex justify-between items-center text-[#C7B8A8]">
                     <span className="tracking-wider uppercase">{t.onAir.yearLabel}</span>
@@ -84,7 +84,7 @@ export const OnAirSection: React.FC = () => {
                 </div>
 
                 <p className="text-xs sm:text-sm text-[#C7B8A8] font-light leading-relaxed">
-                  {primaryShow.description.fr}
+                  {primaryShow.description[lang] || primaryShow.description.fr}
                 </p>
               </div>
 
@@ -105,7 +105,7 @@ export const OnAirSection: React.FC = () => {
                     rel="noreferrer"
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3.5 border border-[#27272A] text-xs text-[#C7B8A8] hover:text-[#F7F3EE] hover:border-[#B79A7E] tracking-wider uppercase transition-colors min-h-[48px]"
                   >
-                    <span>PAGE OFFICIELLE</span>
+                    <span>{t.onAir.officialShowPage}</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
                   </a>
                 )}

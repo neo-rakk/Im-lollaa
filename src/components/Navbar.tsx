@@ -216,7 +216,7 @@ export const Navbar: React.FC = () => {
           <div className="pb-4 mb-2 border-b border-[#27272A]/70 flex items-center justify-between">
             <span className="text-[11px] font-mono tracking-widest text-[#B79A7E] uppercase flex items-center gap-1.5">
               <Globe className="w-3.5 h-3.5" />
-              <span>LANGUE / LANGUAGE</span>
+              <span>{t.nav.languageLabel}</span>
             </span>
             <div className="flex items-center gap-1 border border-[#27272A] p-1 bg-[#141210]">
               {languages.map((item) => (
@@ -240,7 +240,7 @@ export const Navbar: React.FC = () => {
               onClick={() => handleNavClick('home', 'hero')}
               className="py-3.5 text-left hover:text-[#B79A7E] transition-colors min-h-[44px] flex items-center"
             >
-              ACCUEIL / HOME
+              LOLA
             </button>
             <button
               onClick={() => handleNavClick('home', 'person-behind-lola')}

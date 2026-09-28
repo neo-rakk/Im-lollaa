@@ -4,7 +4,7 @@ import { X, Download, Send, CheckCircle2, AlertCircle, FileText, Image } from 'l
 import { editorialAssets } from '../../data/assets';
 
 export const PressModal: React.FC = () => {
-  const { t, setCurrentView, submitPress, profile } = useApp();
+  const { t, setCurrentView, submitPress } = useApp();
   const [formData, setFormData] = useState({
     name: '',
     media: '',
@@ -40,7 +40,7 @@ export const PressModal: React.FC = () => {
       setSuccess(true);
       setFormData({ name: '', media: '', email: '', country: '', topic: '', deadline: '', message: '', honeypot: '' });
     } else {
-      setError(res.error || 'Erreur lors de l’envoi de votre demande presse.');
+      setError(res.error || t.press.pressSuccess);
     }
   };
 
@@ -61,7 +61,7 @@ export const PressModal: React.FC = () => {
         <button
           onClick={() => setCurrentView('home')}
           className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2.5 text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A] hover:border-[#B79A7E] transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center z-10 bg-[#12100E]/90 sm:bg-transparent"
-          aria-label="Fermer"
+          aria-label={t.nav.close}
         >
           <X className="w-5 h-5" />
         </button>
@@ -69,13 +69,13 @@ export const PressModal: React.FC = () => {
         {/* Header */}
         <div className="mb-10">
           <span className="text-[11px] font-mono tracking-widest text-[#B79A7E] uppercase">
-            ESPACE OFFICIEL PRESSE & JOURNALISTES
+            {t.press.kicker}
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl text-[#F7F3EE] font-light mt-1">
-            Press Suite & Relations Médias
+            {t.press.title}
           </h2>
           <p className="text-xs sm:text-sm text-[#C7B8A8] mt-2 font-light">
-            Biographies officielles, portraits studio agréés et demandes d’interviews exclusives.
+            {t.press.desc}
           </p>
         </div>
 
@@ -85,7 +85,7 @@ export const PressModal: React.FC = () => {
           {/* Left Column: Downloadable Assets */}
           <div className="lg:col-span-5 space-y-6">
             <h3 className="font-serif text-xl text-[#F7F3EE] font-medium border-b border-[#27272A] pb-3">
-              Ressources Téléchargeables
+              {t.press.card2Title}
             </h3>
 
             {/* Asset 1: Official Biography */}
@@ -93,16 +93,15 @@ export const PressModal: React.FC = () => {
               <div className="flex items-center gap-3">
                 <FileText className="w-5 h-5 text-[#B79A7E]" />
                 <div>
-                  <p className="text-xs font-medium text-[#F7F3EE]">Biographie Officielle</p>
-                  <p className="text-[10px] text-[#C7B8A8]/70">PDF Trilingue (FR / AR / EN)</p>
+                  <p className="text-xs font-medium text-[#F7F3EE]">{t.press.officialBio}</p>
+                  <p className="text-[10px] text-[#C7B8A8]/70">PDF Trilingual (FR / AR / EN)</p>
                 </div>
               </div>
               <button
                 onClick={() => setCurrentView('about')}
                 className="p-2 border border-[#27272A] text-xs text-[#C7B8A8] hover:text-[#F7F3EE] hover:border-[#B79A7E]"
-                title="Consulter la biographie"
               >
-                LIRE
+                {t.press.readBio}
               </button>
             </div>
 
@@ -112,13 +111,12 @@ export const PressModal: React.FC = () => {
                 <Image className="w-5 h-5 text-[#B79A7E]" />
                 <div>
                   <p className="text-xs font-medium text-[#F7F3EE]">Portrait Officiel HD</p>
-                  <p className="text-[10px] text-[#C7B8A8]/70">Libre de droit presse</p>
+                  <p className="text-[10px] text-[#C7B8A8]/70">4K Media License</p>
                 </div>
               </div>
               <button
                 onClick={() => handleDownloadAsset(editorialAssets.officialPortrait, 'Lola_Official_Portrait_HD.svg')}
                 className="p-2 border border-[#27272A] text-xs text-[#C7B8A8] hover:text-[#F7F3EE] hover:border-[#B79A7E]"
-                title="Télécharger l'image"
               >
                 <Download className="w-3.5 h-3.5" />
               </button>
@@ -130,45 +128,44 @@ export const PressModal: React.FC = () => {
                 <Image className="w-5 h-5 text-[#B79A7E]" />
                 <div>
                   <p className="text-xs font-medium text-[#F7F3EE]">Série Éditoriale Mode</p>
-                  <p className="text-[10px] text-[#C7B8A8]/70">Visuels presse 4K</p>
+                  <p className="text-[10px] text-[#C7B8A8]/70">4K Media License</p>
                 </div>
               </div>
               <button
                 onClick={() => handleDownloadAsset(editorialAssets.hero, 'Lola_Editorial_Series_01.svg')}
                 className="p-2 border border-[#27272A] text-xs text-[#C7B8A8] hover:text-[#F7F3EE] hover:border-[#B79A7E]"
-                title="Télécharger l'image"
               >
                 <Download className="w-3.5 h-3.5" />
               </button>
             </div>
 
             <div className="p-4 bg-[#141210] border border-[#27272A] text-[11px] text-[#C7B8A8] leading-relaxed">
-              <span className="font-semibold text-[#F7F3EE]">Mention obligatoire pour toute parution :</span>
+              <span className="font-semibold text-[#F7F3EE]">im-lolla.com</span>
               <br />
-              « Lola (Khaoula Kebbache) — Site officiel im-lolla.com »
+              « Lola / Khaoula Kebbache »
             </div>
           </div>
 
           {/* Right Column: Press Form */}
           <div className="lg:col-span-7 border-t lg:border-t-0 lg:border-l border-[#27272A] pt-8 lg:pt-0 lg:pl-10">
             <h3 className="font-serif text-xl text-[#F7F3EE] font-medium border-b border-[#27272A] pb-3 mb-6">
-              Formulaire de Demande Presse & Interviews
+              {t.press.pressContactTitle}
             </h3>
 
             {success ? (
               <div className="py-12 text-center space-y-4">
                 <CheckCircle2 className="w-12 h-12 text-[#B79A7E] mx-auto" />
                 <h4 className="font-serif text-2xl text-[#F7F3EE]">
-                  Demande Presse Transmise
+                  {t.collaborate.successTitle}
                 </h4>
                 <p className="text-xs sm:text-sm text-[#C7B8A8]">
-                  {t.press.pressSuccess} Le bureau de presse prendra contact avant votre date limite.
+                  {t.press.pressSuccess}
                 </p>
                 <button
                   onClick={() => setSuccess(false)}
                   className="mt-4 px-6 py-2.5 border border-[#27272A] text-xs text-[#F7F3EE] hover:border-[#B79A7E]"
                 >
-                  Nouvelle demande
+                  {t.contact.sendAnother}
                 </button>
               </div>
             ) : (
@@ -200,7 +197,6 @@ export const PressModal: React.FC = () => {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-3.5 py-2.5 text-base sm:text-xs text-[#F7F3EE] min-h-[44px]"
-                      placeholder="Prénom & Nom du journaliste"
                     />
                   </div>
 
@@ -214,7 +210,6 @@ export const PressModal: React.FC = () => {
                       value={formData.media}
                       onChange={(e) => setFormData({ ...formData, media: e.target.value })}
                       className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-3.5 py-2.5 text-base sm:text-xs text-[#F7F3EE] min-h-[44px]"
-                      placeholder="Nom de la revue / chaîne / média"
                     />
                   </div>
                 </div>
@@ -230,7 +225,6 @@ export const PressModal: React.FC = () => {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-3.5 py-2.5 text-base sm:text-xs text-[#F7F3EE] min-h-[44px]"
-                      placeholder="journaliste@media.com"
                     />
                   </div>
 
@@ -243,7 +237,6 @@ export const PressModal: React.FC = () => {
                       value={formData.deadline}
                       onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
                       className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-3.5 py-2.5 text-base sm:text-xs text-[#F7F3EE] min-h-[44px]"
-                      placeholder="ex: 15 Novembre 2026"
                     />
                   </div>
                 </div>
@@ -258,7 +251,6 @@ export const PressModal: React.FC = () => {
                     value={formData.topic}
                     onChange={(e) => setFormData({ ...formData, topic: e.target.value })}
                     className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-3.5 py-2.5 text-base sm:text-xs text-[#F7F3EE] min-h-[44px]"
-                    placeholder="Sujet de l'article ou de l'interview"
                   />
                 </div>
 
@@ -272,7 +264,6 @@ export const PressModal: React.FC = () => {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-3.5 py-2.5 text-base sm:text-xs text-[#F7F3EE]"
-                    placeholder="Détaillez vos questions et le cadre éditorial..."
                   />
                 </div>
 
@@ -282,7 +273,7 @@ export const PressModal: React.FC = () => {
                   className="w-full py-4 bg-[#F7F3EE] text-[#0B0B0B] text-xs font-semibold tracking-[0.2em] uppercase hover:bg-[#B79A7E] hover:text-white transition-all disabled:opacity-50 flex items-center justify-center gap-2 min-h-[48px]"
                 >
                   <Send className="w-3.5 h-3.5" />
-                  <span>{isSubmitting ? 'TRANSMISSION...' : t.press.pressSubmit}</span>
+                  <span>{isSubmitting ? t.contact.sending : t.press.pressSubmit}</span>
                 </button>
               </form>
             )}
