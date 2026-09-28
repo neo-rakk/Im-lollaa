@@ -6,7 +6,7 @@ export const PressMediaKitSection: React.FC = () => {
   const { t, stats, setCurrentView } = useApp();
 
   return (
-    <section className="py-24 md:py-32 bg-[#0E0C0B] text-[#F7F3EE] border-b border-[#27272A]/50">
+    <section id="press-media-kit" className="py-24 md:py-32 bg-[#0E0C0B] text-[#F7F3EE] border-b border-[#27272A]/50">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Section Header */}

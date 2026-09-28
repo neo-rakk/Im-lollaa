@@ -2,12 +2,29 @@ import React from 'react';
 import { useApp } from '../context/AppContext';
 import { ShieldCheck, ArrowUp } from 'lucide-react';
 import { Language } from '../types';
+import { useEditorialScroll } from '../hooks/useEditorialScroll';
 
 export const Footer: React.FC = () => {
-  const { t, lang, setLang, setCurrentView, socialAccounts } = useApp();
+  const { t, lang, setLang, setCurrentView, currentView, socialAccounts } = useApp();
+  const { scrollToSection } = useEditorialScroll();
+
+  const handleFooterNav = (view: any, targetSectionId?: string) => {
+    if (targetSectionId) {
+      if (currentView !== 'home') {
+        setCurrentView('home');
+        setTimeout(() => {
+          scrollToSection(targetSectionId, { duration: 1.2, ease: 'power3.inOut' });
+        }, 60);
+      } else {
+        scrollToSection(targetSectionId, { duration: 1.2, ease: 'power3.inOut' });
+      }
+      return;
+    }
+    setCurrentView(view);
+  };
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToSection('hero', { duration: 1.2, ease: 'power3.inOut' });
   };
 
   const languages: { code: Language; label: string }[] = [
@@ -53,7 +70,7 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2.5 text-xs text-[#C7B8A8]">
               <li>
                 <button
-                  onClick={() => { setCurrentView('about'); scrollToTop(); }}
+                  onClick={() => handleFooterNav('about', 'person-behind-lola')}
                   className="hover:text-[#F7F3EE] transition-colors"
                 >
                   {t.nav.about}
@@ -61,7 +78,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <button
-                  onClick={() => { setCurrentView('on-air'); scrollToTop(); }}
+                  onClick={() => handleFooterNav('on-air', 'on-air')}
                   className="hover:text-[#F7F3EE] transition-colors"
                 >
                   {t.nav.onAir}
@@ -69,7 +86,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <button
-                  onClick={() => { setCurrentView('beauty'); scrollToTop(); }}
+                  onClick={() => handleFooterNav('beauty', 'beauty-edit')}
                   className="hover:text-[#F7F3EE] transition-colors"
                 >
                   {t.nav.beauty}
@@ -77,7 +94,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <button
-                  onClick={() => { setCurrentView('gallery'); scrollToTop(); }}
+                  onClick={() => handleFooterNav('gallery', 'gallery-section')}
                   className="hover:text-[#F7F3EE] transition-colors"
                 >
                   {t.nav.gallery}
@@ -85,7 +102,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <button
-                  onClick={() => { setCurrentView('collaborate'); scrollToTop(); }}
+                  onClick={() => handleFooterNav('collaborate', 'collaborate-section')}
                   className="hover:text-[#F7F3EE] transition-colors font-medium text-[#F7F3EE]"
                 >
                   {t.nav.collaborate}
@@ -93,7 +110,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <button
-                  onClick={() => { setCurrentView('press'); scrollToTop(); }}
+                  onClick={() => handleFooterNav('press', 'press-media-kit')}
                   className="hover:text-[#F7F3EE] transition-colors"
                 >
                   {t.nav.press}
@@ -101,7 +118,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <button
-                  onClick={() => { setCurrentView('media-kit'); scrollToTop(); }}
+                  onClick={() => handleFooterNav('media-kit')}
                   className="hover:text-[#F7F3EE] transition-colors"
                 >
                   {t.nav.mediaKit}
@@ -109,7 +126,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <button
-                  onClick={() => { setCurrentView('contact'); scrollToTop(); }}
+                  onClick={() => handleFooterNav('contact', 'contact-section')}
                   className="hover:text-[#F7F3EE] transition-colors"
                 >
                   {t.nav.contact}

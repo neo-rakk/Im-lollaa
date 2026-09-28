@@ -2,19 +2,18 @@ import React from 'react';
 import { useApp } from '../context/AppContext';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { editorialAssets } from '../data/assets';
+import { useEditorialScroll } from '../hooks/useEditorialScroll';
 
 export const Hero: React.FC = () => {
   const { t, setCurrentView } = useApp();
+  const { scrollToSection } = useEditorialScroll();
 
   const handleScrollToContent = () => {
-    const nextSection = document.getElementById('person-behind-lola');
-    if (nextSection) {
-      nextSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    scrollToSection('person-behind-lola', { duration: 1.2, ease: 'power3.inOut' });
   };
 
   return (
-    <section className="relative min-h-[92vh] flex flex-col justify-between overflow-hidden bg-[#0B0B0B] text-[#F7F3EE]">
+    <section id="hero" className="relative min-h-[92vh] flex flex-col justify-between overflow-hidden bg-[#0B0B0B] text-[#F7F3EE]">
       {/* Background Graphic Asset with High-Fidelity Silhouette and Measured Scrim */}
       <div className="absolute inset-0 z-0">
         <img

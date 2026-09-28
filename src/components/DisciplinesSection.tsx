@@ -19,7 +19,7 @@ export const DisciplinesSection: React.FC = () => {
   };
 
   return (
-    <section className="py-24 md:py-32 bg-[#0B0B0B] text-[#F7F3EE] border-b border-[#27272A]/50">
+    <section id="disciplines" className="py-24 md:py-32 bg-[#0B0B0B] text-[#F7F3EE] border-b border-[#27272A]/50">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Section Header */}

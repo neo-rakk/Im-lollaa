@@ -2,15 +2,52 @@ import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { Menu, X, Globe, Lock } from 'lucide-react';
 import { Language } from '../types';
+import { useEditorialScroll } from '../hooks/useEditorialScroll';
 
 export const Navbar: React.FC = () => {
   const { lang, setLang, t, setCurrentView, currentView, isAdminAuthenticated } = useApp();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const handleNavClick = (view: any) => {
-    setCurrentView(view);
+  // Section IDs for scroll tracking and smooth gliding
+  const sectionIds = [
+    'hero',
+    'person-behind-lola',
+    'disciplines',
+    'on-air',
+    'beauty-edit',
+    'collaborate-section',
+    'gallery-section',
+    'press-media-kit',
+    'social-presence',
+    'contact-section'
+  ];
+
+  const { scrollToSection, activeSection, scrollProgress } = useEditorialScroll(sectionIds);
+
+  const handleNavClick = (view: any, targetSectionId?: string) => {
     setMobileMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (view === 'admin') {
+      setCurrentView('admin');
+      return;
+    }
+
+    // If targetSectionId is provided, navigate or glide
+    if (targetSectionId) {
+      if (currentView !== 'home') {
+        setCurrentView('home');
+        // Give small tick for DOM layout before scrolling
+        setTimeout(() => {
+          scrollToSection(targetSectionId, { duration: 1.1, ease: 'power3.inOut' });
+        }, 60);
+      } else {
+        scrollToSection(targetSectionId, { duration: 1.1, ease: 'power3.inOut' });
+      }
+      return;
+    }
+
+    // Otherwise standard view setter
+    setCurrentView(view);
   };
 
   const languages: { code: Language; label: string }[] = [
@@ -19,15 +56,32 @@ export const Navbar: React.FC = () => {
     { code: 'en', label: 'EN' }
   ];
 
+  // Helper to determine active state
+  const isNavActive = (view: string, sectionId?: string) => {
+    if (currentView !== 'home') {
+      return currentView === view;
+    }
+    return sectionId ? activeSection === sectionId : false;
+  };
+
   return (
     <>
       {/* Top Bar Contract: Zone 1 (Brand) - Zone 2 (4-6 links) - Zone 3 (Language + CTA) */}
       <header className="sticky top-0 z-40 bg-[#0B0B0B]/90 backdrop-blur-md border-b border-[#27272A]/80 transition-colors">
+        
+        {/* Editorial Scroll Progress Hairline Indicator */}
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-[#27272A]/40 overflow-hidden pointer-events-none">
+          <div
+            className="h-full bg-gradient-to-r from-[#B79A7E]/60 via-[#B79A7E] to-[#E8DDD4] transition-all duration-150 ease-out"
+            style={{ width: `${scrollProgress * 100}%` }}
+          />
+        </div>
+
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           
           {/* Zone 1: Single text element wordmark */}
           <button
-            onClick={() => handleNavClick('home')}
+            onClick={() => handleNavClick('home', 'hero')}
             className="group flex flex-col text-left focus:outline-none"
             aria-label="LOLA Homepage"
           >
@@ -39,44 +93,44 @@ export const Navbar: React.FC = () => {
             </span>
           </button>
 
-          {/* Zone 2: 5 clean text navigation links (No pills) */}
+          {/* Zone 2: 5 clean text navigation links (No pills) with GSAP smooth scroll */}
           <nav className="hidden lg:flex items-center gap-8 text-xs font-medium tracking-[0.18em] text-[#C7B8A8]">
             <button
-              onClick={() => handleNavClick('about')}
+              onClick={() => handleNavClick('home', 'person-behind-lola')}
               className={`hover:text-[#F7F3EE] transition-colors py-1 ${
-                currentView === 'about' ? 'text-[#F7F3EE] border-b border-[#B79A7E]' : ''
+                isNavActive('about', 'person-behind-lola') ? 'text-[#F7F3EE] border-b border-[#B79A7E]' : ''
               }`}
             >
               {t.nav.about}
             </button>
             <button
-              onClick={() => handleNavClick('on-air')}
+              onClick={() => handleNavClick('home', 'on-air')}
               className={`hover:text-[#F7F3EE] transition-colors py-1 ${
-                currentView === 'on-air' ? 'text-[#F7F3EE] border-b border-[#B79A7E]' : ''
+                isNavActive('on-air', 'on-air') ? 'text-[#F7F3EE] border-b border-[#B79A7E]' : ''
               }`}
             >
               {t.nav.onAir}
             </button>
             <button
-              onClick={() => handleNavClick('beauty')}
+              onClick={() => handleNavClick('home', 'beauty-edit')}
               className={`hover:text-[#F7F3EE] transition-colors py-1 ${
-                currentView === 'beauty' ? 'text-[#F7F3EE] border-b border-[#B79A7E]' : ''
+                isNavActive('beauty', 'beauty-edit') ? 'text-[#F7F3EE] border-b border-[#B79A7E]' : ''
               }`}
             >
               {t.nav.beauty}
             </button>
             <button
-              onClick={() => handleNavClick('gallery')}
+              onClick={() => handleNavClick('home', 'gallery-section')}
               className={`hover:text-[#F7F3EE] transition-colors py-1 ${
-                currentView === 'gallery' ? 'text-[#F7F3EE] border-b border-[#B79A7E]' : ''
+                isNavActive('gallery', 'gallery-section') ? 'text-[#F7F3EE] border-b border-[#B79A7E]' : ''
               }`}
             >
               {t.nav.gallery}
             </button>
             <button
-              onClick={() => handleNavClick('press')}
+              onClick={() => handleNavClick('home', 'press-media-kit')}
               className={`hover:text-[#F7F3EE] transition-colors py-1 ${
-                currentView === 'press' ? 'text-[#F7F3EE] border-b border-[#B79A7E]' : ''
+                isNavActive('press', 'press-media-kit') ? 'text-[#F7F3EE] border-b border-[#B79A7E]' : ''
               }`}
             >
               {t.nav.press}
@@ -90,9 +144,9 @@ export const Navbar: React.FC = () => {
               {t.nav.mediaKit}
             </button>
             <button
-              onClick={() => handleNavClick('contact')}
+              onClick={() => handleNavClick('home', 'contact-section')}
               className={`hover:text-[#F7F3EE] transition-colors py-1 ${
-                currentView === 'contact' ? 'text-[#F7F3EE] border-b border-[#B79A7E]' : ''
+                isNavActive('contact', 'contact-section') ? 'text-[#F7F3EE] border-b border-[#B79A7E]' : ''
               }`}
             >
               {t.nav.contact}
@@ -155,42 +209,42 @@ export const Navbar: React.FC = () => {
         </div>
       </header>
 
-      {/* Fullscreen Mobile Drawer */}
+      {/* Fullscreen Mobile Drawer with Smooth Gliding */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 top-20 z-50 bg-[#0B0B0B]/98 backdrop-blur-xl flex flex-col justify-between p-8 lg:hidden animate-fadeIn">
           <nav className="flex flex-col gap-6 text-lg font-serif tracking-widest text-[#F7F3EE] divide-y divide-[#27272A]">
             <button
-              onClick={() => handleNavClick('home')}
+              onClick={() => handleNavClick('home', 'hero')}
               className="pt-4 text-left hover:text-[#B79A7E] transition-colors"
             >
               ACCUEIL / HOME
             </button>
             <button
-              onClick={() => handleNavClick('about')}
+              onClick={() => handleNavClick('home', 'person-behind-lola')}
               className="pt-4 text-left hover:text-[#B79A7E] transition-colors"
             >
               {t.nav.about}
             </button>
             <button
-              onClick={() => handleNavClick('on-air')}
+              onClick={() => handleNavClick('home', 'on-air')}
               className="pt-4 text-left hover:text-[#B79A7E] transition-colors"
             >
               {t.nav.onAir}
             </button>
             <button
-              onClick={() => handleNavClick('beauty')}
+              onClick={() => handleNavClick('home', 'beauty-edit')}
               className="pt-4 text-left hover:text-[#B79A7E] transition-colors"
             >
               {t.nav.beauty}
             </button>
             <button
-              onClick={() => handleNavClick('gallery')}
+              onClick={() => handleNavClick('home', 'gallery-section')}
               className="pt-4 text-left hover:text-[#B79A7E] transition-colors"
             >
               {t.nav.gallery}
             </button>
             <button
-              onClick={() => handleNavClick('press')}
+              onClick={() => handleNavClick('home', 'press-media-kit')}
               className="pt-4 text-left hover:text-[#B79A7E] transition-colors"
             >
               {t.nav.press}
@@ -202,7 +256,7 @@ export const Navbar: React.FC = () => {
               {t.nav.mediaKit}
             </button>
             <button
-              onClick={() => handleNavClick('contact')}
+              onClick={() => handleNavClick('home', 'contact-section')}
               className="pt-4 text-left hover:text-[#B79A7E] transition-colors"
             >
               {t.nav.contact}

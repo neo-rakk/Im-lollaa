@@ -15,7 +15,7 @@ export const CollaborateSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 md:py-32 bg-[#0B0B0B] text-[#F7F3EE] border-b border-[#27272A]/50 relative overflow-hidden">
+    <section id="collaborate-section" className="py-24 md:py-32 bg-[#0B0B0B] text-[#F7F3EE] border-b border-[#27272A]/50 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         
         <div className="border border-[#27272A] bg-gradient-to-b from-[#141210] to-[#0E0C0B] p-8 md:p-16 lg:p-20 relative">

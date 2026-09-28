@@ -14,7 +14,7 @@ export const OnAirSection: React.FC = () => {
   };
 
   return (
-    <section className="py-24 md:py-32 bg-[#0E0C0B] text-[#F7F3EE] border-b border-[#27272A]/50 relative overflow-hidden">
+    <section id="on-air" className="py-24 md:py-32 bg-[#0E0C0B] text-[#F7F3EE] border-b border-[#27272A]/50 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Section Header */}
