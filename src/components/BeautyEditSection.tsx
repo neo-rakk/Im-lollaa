@@ -25,32 +25,32 @@ export const BeautyEditSection: React.FC = () => {
   };
 
   return (
-    <section id="beauty-edit" className="py-24 md:py-32 bg-[#0B0B0B] text-[#F7F3EE] border-b border-[#27272A]/50">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="beauty-edit" className="py-16 sm:py-24 md:py-32 bg-[#0B0B0B] text-[#F7F3EE] border-b border-[#27272A]/50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         
         {/* Section Header & Subtitle */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-4 sm:gap-6">
           <div>
-            <div className="flex items-center gap-2 text-xs tracking-[0.25em] text-[#B79A7E] uppercase font-medium mb-3">
+            <div className="flex items-center gap-2 text-[11px] sm:text-xs tracking-[0.25em] text-[#B79A7E] uppercase font-medium mb-2 sm:mb-3">
               <Sparkles className="w-3.5 h-3.5" />
               <span>{t.beauty.kicker}</span>
             </div>
-            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#F7F3EE] font-light tracking-tight">
+            <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl text-[#F7F3EE] font-light tracking-tight">
               {t.beauty.title}
             </h2>
           </div>
-          <p className="text-xs tracking-widest text-[#C7B8A8]/70 uppercase">
+          <p className="text-[11px] sm:text-xs tracking-widest text-[#C7B8A8]/70 uppercase">
             {t.beauty.subtitle}
           </p>
         </div>
 
-        {/* Interactive Filter Controls: Allowed segmented buttons with click handlers */}
-        <div className="flex flex-wrap items-center gap-2 pb-10 border-b border-[#27272A]/40 mb-12">
+        {/* Interactive Filter Controls: Touch-friendly segmented buttons with wrap on mobile */}
+        <div className="flex flex-wrap items-center gap-2 pb-6 sm:pb-8 border-b border-[#27272A]/40 mb-8 sm:mb-12">
           {categories.map((cat) => (
             <button
               key={cat.key}
               onClick={() => setSelectedCategory(cat.key)}
-              className={`px-4 py-2 text-xs tracking-[0.15em] uppercase font-medium transition-all ${
+              className={`px-3.5 sm:px-4 py-2 sm:py-2.5 text-[11px] sm:text-xs tracking-[0.14em] uppercase font-medium transition-all min-h-[40px] flex items-center justify-center ${
                 selectedCategory === cat.key
                   ? 'bg-[#F7F3EE] text-[#0B0B0B] font-semibold'
                   : 'bg-[#141210] text-[#C7B8A8] border border-[#27272A] hover:text-[#F7F3EE] hover:border-[#B79A7E]'
@@ -61,8 +61,8 @@ export const BeautyEditSection: React.FC = () => {
           ))}
         </div>
 
-        {/* Editorial Articles Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Editorial Articles Grid: 1 col mobile, 2 cols tablet, 3 cols desktop */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {filteredArticles.map((article) => (
             <article
               key={article.id}
@@ -79,35 +79,35 @@ export const BeautyEditSection: React.FC = () => {
                 <div className="absolute inset-0 bg-[#0B0B0B]/20 group-hover:bg-transparent transition-colors" />
                 
                 {/* Clean unboxed category kicker overlay */}
-                <div className="absolute top-4 left-4 text-[10px] tracking-widest font-mono text-[#F7F3EE] uppercase bg-[#0B0B0B]/80 px-2 py-1">
+                <div className="absolute top-3 sm:top-4 left-3 sm:left-4 text-[9px] sm:text-[10px] tracking-widest font-mono text-[#F7F3EE] uppercase bg-[#0B0B0B]/80 px-2 py-1">
                   {article.category}
                 </div>
               </div>
 
               {/* Text content */}
-              <div className="p-6 flex-1 flex flex-col justify-between">
+              <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
                 <div>
                   {/* Clean unboxed metadata with bullet separator */}
-                  <div className="flex items-center gap-2 text-xs text-[#C7B8A8]/70 mb-3">
-                    <span className="flex items-center gap-1 font-mono text-[11px]">
+                  <div className="flex items-center gap-2 text-xs text-[#C7B8A8]/70 mb-2.5 sm:mb-3">
+                    <span className="flex items-center gap-1 font-mono text-[10px] sm:text-[11px]">
                       <Clock className="w-3 h-3 text-[#B79A7E]" />
                       {article.readTime.fr}
                     </span>
                     <span aria-hidden="true">·</span>
-                    <span className="font-mono text-[11px]">{article.publishedAt}</span>
+                    <span className="font-mono text-[10px] sm:text-[11px]">{article.publishedAt}</span>
                   </div>
 
                   <h3 className="font-serif text-xl sm:text-2xl text-[#F7F3EE] group-hover:text-[#B79A7E] transition-colors font-medium leading-snug">
                     {article.title.fr}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-[#C7B8A8] mt-3 font-light leading-relaxed line-clamp-3">
+                  <p className="text-xs sm:text-sm text-[#C7B8A8] mt-2.5 sm:mt-3 font-light leading-relaxed line-clamp-3">
                     {article.excerpt.fr}
                   </p>
                 </div>
 
                 {/* Read article button */}
-                <div className="pt-6 mt-6 border-t border-[#27272A]/60 flex items-center justify-between text-xs tracking-wider text-[#B79A7E] font-medium">
+                <div className="pt-4 sm:pt-6 mt-4 sm:mt-6 border-t border-[#27272A]/60 flex items-center justify-between text-xs tracking-wider text-[#B79A7E] font-medium min-h-[36px]">
                   <span className="group-hover:text-[#F7F3EE] transition-colors">{t.beauty.readArticle}</span>
                   <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                 </div>

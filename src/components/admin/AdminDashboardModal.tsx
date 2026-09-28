@@ -134,30 +134,30 @@ export const AdminDashboardModal: React.FC = () => {
   ];
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#0B0B0B]/98 backdrop-blur-2xl flex items-center justify-center p-2 sm:p-6 lg:p-10 animate-fadeIn">
-      <div className="relative w-full max-w-6xl bg-[#12100E] border border-[#27272A] p-6 sm:p-8 text-[#F7F3EE] shadow-2xl my-4 min-h-[85vh] flex flex-col justify-between">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#0B0B0B]/98 backdrop-blur-2xl flex items-start justify-center p-2 sm:p-4 lg:p-8 animate-fadeIn">
+      <div className="relative w-full max-w-6xl bg-[#12100E] border border-[#27272A] p-4 sm:p-6 lg:p-8 text-[#F7F3EE] shadow-2xl my-2 sm:my-4 max-h-[96dvh] overflow-y-auto flex flex-col justify-between">
         
         {/* Top Header */}
-        <div className="flex items-center justify-between pb-6 border-b border-[#27272A] mb-6">
-          <div className="flex items-center gap-3">
-            <div className="p-2 border border-[#B79A7E]/50 bg-[#1A1816]">
+        <div className="flex items-center justify-between pb-4 sm:pb-6 border-b border-[#27272A] mb-4 sm:mb-6">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="p-2 border border-[#B79A7E]/50 bg-[#1A1816] shrink-0">
               <Lock className="w-4 h-4 text-[#B79A7E]" />
             </div>
             <div>
-              <h2 className="font-serif text-xl sm:text-2xl text-[#F7F3EE] font-medium tracking-tight">
+              <h2 className="font-serif text-lg sm:text-2xl text-[#F7F3EE] font-medium tracking-tight">
                 LOLA CMS & EXECUTIVE CONSOLE
               </h2>
-              <p className="text-[10px] font-mono tracking-widest text-[#B79A7E] uppercase">
+              <p className="text-[9px] sm:text-[10px] font-mono tracking-widest text-[#B79A7E] uppercase">
                 ADMINISTRATION OFFICIELLE · IM-LOLLA.COM
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             {isAdminAuthenticated && (
               <button
                 onClick={adminLogout}
-                className="inline-flex items-center gap-2 px-3 py-1.5 border border-[#27272A] text-xs text-[#C7B8A8] hover:text-[#F7F3EE] hover:border-red-600 transition-colors"
+                className="inline-flex items-center gap-2 px-3 py-1.5 border border-[#27272A] text-xs text-[#C7B8A8] hover:text-[#F7F3EE] hover:border-red-600 transition-colors min-h-[36px]"
               >
                 <LogOut className="w-3.5 h-3.5" />
                 <span className="hidden sm:inline">DÉCONNEXION</span>
@@ -166,7 +166,7 @@ export const AdminDashboardModal: React.FC = () => {
 
             <button
               onClick={() => setCurrentView('home')}
-              className="p-2 text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A] hover:border-[#B79A7E] transition-colors"
+              className="p-2 text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A] hover:border-[#B79A7E] transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label="Fermer"
             >
               <X className="w-5 h-5" />
@@ -176,7 +176,7 @@ export const AdminDashboardModal: React.FC = () => {
 
         {/* If Not Authenticated: Login Panel */}
         {!isAdminAuthenticated ? (
-          <div className="my-auto max-w-md mx-auto w-full p-8 border border-[#27272A] bg-[#141210] text-center space-y-6">
+          <div className="my-auto max-w-md mx-auto w-full p-6 sm:p-8 border border-[#27272A] bg-[#141210] text-center space-y-6">
             <Lock className="w-12 h-12 text-[#B79A7E] mx-auto" />
             <div>
               <h3 className="font-serif text-2xl text-[#F7F3EE]">Accès Restreint</h3>
@@ -192,7 +192,7 @@ export const AdminDashboardModal: React.FC = () => {
                 value={loginPassword}
                 onChange={(e) => setLoginPassword(e.target.value)}
                 placeholder="Clé de sécurité (ex: lola2026)"
-                className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] px-4 py-3 text-xs text-[#F7F3EE] text-center tracking-widest"
+                className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-4 py-3 text-base sm:text-xs text-[#F7F3EE] text-center tracking-widest min-h-[44px]"
               />
 
               {loginError && (
@@ -203,7 +203,7 @@ export const AdminDashboardModal: React.FC = () => {
 
               <button
                 type="submit"
-                className="w-full py-3 bg-[#F7F3EE] text-[#0B0B0B] text-xs font-semibold tracking-widest uppercase hover:bg-[#B79A7E] hover:text-white transition-colors"
+                className="w-full py-3.5 bg-[#F7F3EE] text-[#0B0B0B] text-xs font-semibold tracking-widest uppercase hover:bg-[#B79A7E] hover:text-white transition-colors min-h-[48px]"
               >
                 CONNEXION DIRECTE
               </button>
@@ -217,50 +217,50 @@ export const AdminDashboardModal: React.FC = () => {
           /* Authenticated Admin Workspace */
           <div className="flex-1 flex flex-col space-y-6">
             
-            {/* KPI Badges Bar */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
+            {/* KPI Badges Bar: Responsive grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-3">
               <div className="p-3 border border-[#27272A] bg-[#141210]">
-                <span className="text-[10px] font-mono text-[#B79A7E] uppercase">COLLABORATIONS</span>
-                <p className="text-xl font-serif font-bold text-[#F7F3EE]">{collaborations.length}</p>
+                <span className="text-[9px] sm:text-[10px] font-mono text-[#B79A7E] uppercase">COLLABORATIONS</span>
+                <p className="text-lg sm:text-xl font-serif font-bold text-[#F7F3EE]">{collaborations.length}</p>
                 <p className="text-[10px] text-[#C7B8A8]/60">{collaborations.filter(c => c.status === 'NEW').length} nouvelles</p>
               </div>
 
               <div className="p-3 border border-[#27272A] bg-[#141210]">
-                <span className="text-[10px] font-mono text-[#B79A7E] uppercase">DEMANDES PRESSE</span>
-                <p className="text-xl font-serif font-bold text-[#F7F3EE]">{pressRequests.length}</p>
+                <span className="text-[9px] sm:text-[10px] font-mono text-[#B79A7E] uppercase">DEMANDES PRESSE</span>
+                <p className="text-lg sm:text-xl font-serif font-bold text-[#F7F3EE]">{pressRequests.length}</p>
                 <p className="text-[10px] text-[#C7B8A8]/60">{pressRequests.filter(p => p.status === 'NEW').length} en attente</p>
               </div>
 
               <div className="p-3 border border-[#27272A] bg-[#141210]">
-                <span className="text-[10px] font-mono text-[#B79A7E] uppercase">MESSAGES CONTACT</span>
-                <p className="text-xl font-serif font-bold text-[#F7F3EE]">{contactRequests.length}</p>
+                <span className="text-[9px] sm:text-[10px] font-mono text-[#B79A7E] uppercase">MESSAGES CONTACT</span>
+                <p className="text-lg sm:text-xl font-serif font-bold text-[#F7F3EE]">{contactRequests.length}</p>
                 <p className="text-[10px] text-[#C7B8A8]/60">{contactRequests.filter(c => c.status === 'NEW').length} non lus</p>
               </div>
 
               <div className="p-3 border border-[#27272A] bg-[#141210]">
-                <span className="text-[10px] font-mono text-[#B79A7E] uppercase">ARTICLES BEAUTÉ</span>
-                <p className="text-xl font-serif font-bold text-[#F7F3EE]">{beautyArticles.length}</p>
+                <span className="text-[9px] sm:text-[10px] font-mono text-[#B79A7E] uppercase">ARTICLES BEAUTÉ</span>
+                <p className="text-lg sm:text-xl font-serif font-bold text-[#F7F3EE]">{beautyArticles.length}</p>
                 <p className="text-[10px] text-[#C7B8A8]/60">Édition active</p>
               </div>
 
               <div className="p-3 border border-[#27272A] bg-[#141210]">
-                <span className="text-[10px] font-mono text-[#B79A7E] uppercase">PROJETS TV</span>
-                <p className="text-xl font-serif font-bold text-[#F7F3EE]">{tvProjects.length}</p>
+                <span className="text-[9px] sm:text-[10px] font-mono text-[#B79A7E] uppercase">PROJETS TV</span>
+                <p className="text-lg sm:text-xl font-serif font-bold text-[#F7F3EE]">{tvProjects.length}</p>
                 <p className="text-[10px] text-[#C7B8A8]/60">Miss Fashion DZ</p>
               </div>
 
               <div className="p-3 border border-[#27272A] bg-[#141210]">
-                <span className="text-[10px] font-mono text-[#B79A7E] uppercase">AUDIENCE CERTIFIÉE</span>
-                <p className="text-xl font-serif font-bold text-[#F7F3EE]">{stats[0]?.display_value}</p>
+                <span className="text-[9px] sm:text-[10px] font-mono text-[#B79A7E] uppercase">AUDIENCE CERTIFIÉE</span>
+                <p className="text-lg sm:text-xl font-serif font-bold text-[#F7F3EE]">{stats[0]?.display_value}</p>
                 <p className="text-[10px] text-[#C7B8A8]/60">Source vérifiée</p>
               </div>
             </div>
 
-            {/* Navigation Tabs */}
-            <div className="flex flex-wrap items-center gap-2 border-b border-[#27272A] pb-3 text-xs">
+            {/* Navigation Tabs: Touch-scrollable horizontally on mobile/tablet */}
+            <div className="flex overflow-x-auto no-scrollbar items-center gap-2 border-b border-[#27272A] pb-3 text-xs whitespace-nowrap">
               <button
                 onClick={() => setActiveTab('collabs')}
-                className={`px-3 py-2 font-mono uppercase transition-colors ${
+                className={`px-3 py-2 font-mono uppercase transition-colors shrink-0 ${
                   activeTab === 'collabs'
                     ? 'bg-[#F7F3EE] text-[#0B0B0B] font-semibold'
                     : 'text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A]'
@@ -271,7 +271,7 @@ export const AdminDashboardModal: React.FC = () => {
 
               <button
                 onClick={() => setActiveTab('press')}
-                className={`px-3 py-2 font-mono uppercase transition-colors ${
+                className={`px-3 py-2 font-mono uppercase transition-colors shrink-0 ${
                   activeTab === 'press'
                     ? 'bg-[#F7F3EE] text-[#0B0B0B] font-semibold'
                     : 'text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A]'
@@ -282,7 +282,7 @@ export const AdminDashboardModal: React.FC = () => {
 
               <button
                 onClick={() => setActiveTab('profile')}
-                className={`px-3 py-2 font-mono uppercase transition-colors ${
+                className={`px-3 py-2 font-mono uppercase transition-colors shrink-0 ${
                   activeTab === 'profile'
                     ? 'bg-[#F7F3EE] text-[#0B0B0B] font-semibold'
                     : 'text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A]'
@@ -293,7 +293,7 @@ export const AdminDashboardModal: React.FC = () => {
 
               <button
                 onClick={() => setActiveTab('beauty')}
-                className={`px-3 py-2 font-mono uppercase transition-colors ${
+                className={`px-3 py-2 font-mono uppercase transition-colors shrink-0 ${
                   activeTab === 'beauty'
                     ? 'bg-[#F7F3EE] text-[#0B0B0B] font-semibold'
                     : 'text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A]'
@@ -304,7 +304,7 @@ export const AdminDashboardModal: React.FC = () => {
 
               <button
                 onClick={() => setActiveTab('tv')}
-                className={`px-3 py-2 font-mono uppercase transition-colors ${
+                className={`px-3 py-2 font-mono uppercase transition-colors shrink-0 ${
                   activeTab === 'tv'
                     ? 'bg-[#F7F3EE] text-[#0B0B0B] font-semibold'
                     : 'text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A]'
@@ -315,7 +315,7 @@ export const AdminDashboardModal: React.FC = () => {
 
               <button
                 onClick={() => setActiveTab('stats')}
-                className={`px-3 py-2 font-mono uppercase transition-colors ${
+                className={`px-3 py-2 font-mono uppercase transition-colors shrink-0 ${
                   activeTab === 'stats'
                     ? 'bg-[#F7F3EE] text-[#0B0B0B] font-semibold'
                     : 'text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A]'
@@ -326,7 +326,7 @@ export const AdminDashboardModal: React.FC = () => {
 
               <button
                 onClick={() => setActiveTab('settings')}
-                className={`px-3 py-2 font-mono uppercase transition-colors ${
+                className={`px-3 py-2 font-mono uppercase transition-colors shrink-0 ${
                   activeTab === 'settings'
                     ? 'bg-[#F7F3EE] text-[#0B0B0B] font-semibold'
                     : 'text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A]'
@@ -337,7 +337,7 @@ export const AdminDashboardModal: React.FC = () => {
 
               <button
                 onClick={() => setActiveTab('logs')}
-                className={`px-3 py-2 font-mono uppercase transition-colors ${
+                className={`px-3 py-2 font-mono uppercase transition-colors shrink-0 ${
                   activeTab === 'logs'
                     ? 'bg-[#F7F3EE] text-[#0B0B0B] font-semibold'
                     : 'text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A]'

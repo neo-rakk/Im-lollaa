@@ -21,13 +21,13 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#0B0B0B]/95 backdrop-blur-xl flex items-center justify-center p-4 sm:p-6 lg:p-10 animate-fadeIn">
-      <div className="relative w-full max-w-3xl bg-[#12100E] border border-[#27272A] p-6 sm:p-10 lg:p-12 text-[#F7F3EE] shadow-2xl my-8">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#0B0B0B]/95 backdrop-blur-xl flex items-start justify-center p-3 sm:p-6 lg:p-10 animate-fadeIn">
+      <div className="relative w-full max-w-3xl bg-[#12100E] border border-[#27272A] p-5 sm:p-10 lg:p-12 text-[#F7F3EE] shadow-2xl my-4 sm:my-8 min-h-0">
         
-        {/* Close Button */}
+        {/* Close Button with accessible touch target */}
         <button
           onClick={() => setCurrentView('home')}
-          className="absolute top-6 right-6 p-2 text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A] hover:border-[#B79A7E] transition-colors"
+          className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2.5 text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A] hover:border-[#B79A7E] transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center z-10 bg-[#12100E]/90 sm:bg-transparent"
           aria-label="Fermer"
         >
           <X className="w-5 h-5" />
@@ -102,7 +102,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ type }) => {
         <div className="pt-8 mt-8 border-t border-[#27272A] flex justify-end">
           <button
             onClick={() => setCurrentView('home')}
-            className="px-6 py-2.5 bg-[#F7F3EE] text-[#0B0B0B] text-xs font-semibold tracking-wider uppercase hover:bg-[#B79A7E] hover:text-white transition-colors"
+            className="w-full sm:w-auto px-6 py-3 bg-[#F7F3EE] text-[#0B0B0B] text-xs font-semibold tracking-wider uppercase hover:bg-[#B79A7E] hover:text-white transition-colors min-h-[44px] flex items-center justify-center"
           >
             COMPRIS / FERMER
           </button>

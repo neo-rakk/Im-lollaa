@@ -9,13 +9,13 @@ export const BeautyArticleModal: React.FC = () => {
   const article: BeautyArticle = selectedArticle || beautyArticles[0];
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#0B0B0B]/95 backdrop-blur-xl flex items-center justify-center p-4 sm:p-6 lg:p-10 animate-fadeIn">
-      <div className="relative w-full max-w-3xl bg-[#12100E] border border-[#27272A] p-6 sm:p-10 lg:p-12 text-[#F7F3EE] shadow-2xl my-8">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#0B0B0B]/95 backdrop-blur-xl flex items-start justify-center p-3 sm:p-6 lg:p-10 animate-fadeIn">
+      <div className="relative w-full max-w-3xl bg-[#12100E] border border-[#27272A] p-5 sm:p-10 lg:p-12 text-[#F7F3EE] shadow-2xl my-4 sm:my-8 min-h-0">
         
-        {/* Close button */}
+        {/* Close button with accessible touch target */}
         <button
           onClick={() => setCurrentView('home')}
-          className="absolute top-6 right-6 p-2 text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A] hover:border-[#B79A7E] transition-colors"
+          className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2.5 text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A] hover:border-[#B79A7E] transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center z-10 bg-[#12100E]/90 sm:bg-transparent"
           aria-label="Fermer"
         >
           <X className="w-5 h-5" />
@@ -74,7 +74,7 @@ export const BeautyArticleModal: React.FC = () => {
         </div>
 
         {/* Author sign-off */}
-        <div className="mt-8 p-6 border border-[#27272A] bg-[#141210] flex items-center justify-between">
+        <div className="mt-8 p-5 sm:p-6 border border-[#27272A] bg-[#141210] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <p className="text-xs font-semibold text-[#F7F3EE] font-serif">
               Lola (Khaoula Kebbache)
@@ -86,7 +86,7 @@ export const BeautyArticleModal: React.FC = () => {
 
           <button
             onClick={() => setCurrentView('beauty')}
-            className="px-4 py-2 border border-[#27272A] text-xs text-[#C7B8A8] hover:text-[#F7F3EE] hover:border-[#B79A7E] transition-colors"
+            className="self-start sm:self-auto px-4 py-2 border border-[#27272A] text-xs text-[#C7B8A8] hover:text-[#F7F3EE] hover:border-[#B79A7E] transition-colors min-h-[40px] flex items-center justify-center"
           >
             TOUS LES ARTICLES
           </button>

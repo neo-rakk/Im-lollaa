@@ -96,13 +96,13 @@ export const CollaborateModal: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#0B0B0B]/95 backdrop-blur-xl flex items-center justify-center p-4 sm:p-6 lg:p-10 animate-fadeIn">
-      <div className="relative w-full max-w-4xl bg-[#12100E] border border-[#27272A] p-6 sm:p-10 lg:p-12 text-[#F7F3EE] shadow-2xl my-8">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#0B0B0B]/95 backdrop-blur-xl flex items-start justify-center p-3 sm:p-6 lg:p-10 animate-fadeIn">
+      <div className="relative w-full max-w-4xl bg-[#12100E] border border-[#27272A] p-5 sm:p-10 lg:p-12 text-[#F7F3EE] shadow-2xl my-4 sm:my-8 min-h-0">
         
-        {/* Close button */}
+        {/* Close button with accessible touch target */}
         <button
           onClick={() => setCurrentView('home')}
-          className="absolute top-6 right-6 p-2 text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A] hover:border-[#B79A7E] transition-colors"
+          className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2.5 text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A] hover:border-[#B79A7E] transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center z-10 bg-[#141210]/80 sm:bg-transparent"
           aria-label="Fermer"
         >
           <X className="w-5 h-5" />
@@ -358,16 +358,16 @@ export const CollaborateModal: React.FC = () => {
               </div>
 
               {/* Submit CTA */}
-              <div className="pt-4 flex items-center justify-between">
+              <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
                 <div className="flex items-center gap-2 text-[11px] text-[#C7B8A8]/60">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#B79A7E]" />
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#B79A7E] shrink-0" />
                   <span>Dossier chiffré & confidentiel</span>
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-[#F7F3EE] text-[#0B0B0B] text-xs font-semibold tracking-[0.2em] uppercase hover:bg-[#B79A7E] hover:text-white transition-all disabled:opacity-50"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#F7F3EE] text-[#0B0B0B] text-xs font-semibold tracking-[0.2em] uppercase hover:bg-[#B79A7E] hover:text-white transition-all disabled:opacity-50 min-h-[48px]"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span>{isSubmitting ? 'ENREGISTREMENT...' : t.collaborate.submit}</span>

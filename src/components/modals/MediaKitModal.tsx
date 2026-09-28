@@ -13,27 +13,28 @@ export const MediaKitModal: React.FC = () => {
   const instagramStat = stats.find(s => s.platform.toLowerCase() === 'instagram') || stats[0];
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#0B0B0B]/95 backdrop-blur-xl flex items-center justify-center p-4 sm:p-6 lg:p-10 animate-fadeIn">
-      <div className="relative w-full max-w-4xl bg-[#12100E] border border-[#27272A] p-6 sm:p-10 lg:p-12 text-[#F7F3EE] shadow-2xl my-8 print:border-none print:bg-white print:text-black">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#0B0B0B]/95 backdrop-blur-xl flex items-start justify-center p-3 sm:p-6 lg:p-10 animate-fadeIn">
+      <div className="relative w-full max-w-4xl bg-[#12100E] border border-[#27272A] p-5 sm:p-10 lg:p-12 text-[#F7F3EE] shadow-2xl my-4 sm:my-8 min-h-0 print:border-none print:bg-white print:text-black">
         
         {/* Header Controls */}
-        <div className="flex items-center justify-between pb-6 border-b border-[#27272A] mb-8 print:hidden">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-[#27272A] mb-8 gap-4 print:hidden">
           <div className="flex items-center gap-2 text-xs font-mono text-[#B79A7E] tracking-widest uppercase">
             <span>OFFICIAL MEDIA KIT · 2026 EDITION</span>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 self-end sm:self-auto">
             <button
               onClick={handlePrint}
-              className="inline-flex items-center gap-2 px-4 py-2 border border-[#27272A] hover:border-[#B79A7E] text-xs font-medium tracking-wider uppercase transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 border border-[#27272A] hover:border-[#B79A7E] text-xs font-medium tracking-wider uppercase transition-colors min-h-[44px]"
             >
               <Printer className="w-3.5 h-3.5 text-[#B79A7E]" />
-              <span>IMPRIMER / EXPORTER (PDF)</span>
+              <span className="hidden sm:inline">IMPRIMER / EXPORTER (PDF)</span>
+              <span className="sm:hidden">PDF</span>
             </button>
 
             <button
               onClick={() => setCurrentView('home')}
-              className="p-2 text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A] hover:border-[#B79A7E] transition-colors"
+              className="p-2.5 text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A] hover:border-[#B79A7E] transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label="Fermer"
             >
               <X className="w-5 h-5" />

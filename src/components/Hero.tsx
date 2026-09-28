@@ -13,43 +13,43 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section id="hero" className="relative min-h-[92vh] flex flex-col justify-between overflow-hidden bg-[#0B0B0B] text-[#F7F3EE]">
+    <section id="hero" className="relative min-h-[100dvh] flex flex-col justify-between overflow-hidden bg-[#0B0B0B] text-[#F7F3EE]">
       {/* Background Graphic Asset with High-Fidelity Silhouette and Measured Scrim */}
       <div className="absolute inset-0 z-0">
         <img
           src={editorialAssets.hero}
           alt="LOLA Editorial Portrait"
-          className="w-full h-full object-cover object-center opacity-85 select-none"
+          className="w-full h-full object-cover object-center opacity-80 sm:opacity-85 select-none"
           loading="eager"
         />
         {/* Measured Dark Scrim for WCAG AA readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B] via-[#0B0B0B]/60 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0B]/90 via-[#0B0B0B]/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B] via-[#0B0B0B]/70 sm:via-[#0B0B0B]/60 to-[#0B0B0B]/30 sm:to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0B]/95 via-[#0B0B0B]/60 sm:via-[#0B0B0B]/40 to-transparent" />
       </div>
 
       {/* Top spacing */}
-      <div className="relative z-10 pt-16 px-6 max-w-7xl mx-auto w-full">
-        <div className="flex items-center gap-3 text-xs tracking-[0.3em] uppercase text-[#B79A7E]">
-          <span className="w-8 h-[1px] bg-[#B79A7E]" />
+      <div className="relative z-10 pt-10 sm:pt-16 px-4 sm:px-6 max-w-7xl mx-auto w-full">
+        <div className="flex items-center gap-2 sm:gap-3 text-[10px] sm:text-xs tracking-[0.25em] sm:tracking-[0.3em] uppercase text-[#B79A7E]">
+          <span className="w-6 sm:w-8 h-[1px] bg-[#B79A7E]" />
           <span>{t.hero.tagline}</span>
         </div>
       </div>
 
       {/* Main Center Typography */}
-      <div className="relative z-10 px-6 max-w-7xl mx-auto w-full my-auto py-12">
+      <div className="relative z-10 px-4 sm:px-6 max-w-7xl mx-auto w-full my-auto py-8 sm:py-12">
         <div className="max-w-3xl">
           {/* Civil name subtitle */}
-          <p className="text-sm md:text-base tracking-[0.35em] text-[#C7B8A8] uppercase font-medium mb-3">
+          <p className="text-xs sm:text-sm md:text-base tracking-[0.28em] sm:tracking-[0.35em] text-[#C7B8A8] uppercase font-medium mb-2 sm:mb-3">
             {t.hero.subtitle}
           </p>
 
           {/* Big Editorial Title: LOLA */}
-          <h1 className="font-serif text-7xl sm:text-8xl md:text-9xl lg:text-[11rem] leading-[0.88] tracking-tight text-[#F7F3EE] font-light">
+          <h1 className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[11rem] leading-[0.9] tracking-tight text-[#F7F3EE] font-light">
             LOLA
           </h1>
 
           {/* Disciplines Kicker */}
-          <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs sm:text-sm md:text-base tracking-[0.2em] font-medium text-[#E8DDD4]/90 uppercase">
+          <div className="mt-5 sm:mt-8 flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-1 sm:gap-y-2 text-[11px] sm:text-sm md:text-base tracking-[0.16em] sm:tracking-[0.2em] font-medium text-[#E8DDD4]/90 uppercase">
             <span>CREATOR</span>
             <span className="text-[#B79A7E]" aria-hidden="true">·</span>
             <span>PRESENTER</span>
@@ -60,10 +60,10 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Action CTAs */}
-          <div className="mt-10 flex flex-wrap items-center gap-4">
+          <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 max-w-md sm:max-w-none">
             <button
               onClick={handleScrollToContent}
-              className="inline-flex items-center gap-3 px-7 py-3.5 bg-[#F7F3EE] text-[#0B0B0B] text-xs font-semibold tracking-[0.2em] uppercase hover:bg-[#B79A7E] hover:text-white transition-all duration-300"
+              className="inline-flex items-center justify-center gap-3 px-6 sm:px-7 py-3.5 sm:py-4 bg-[#F7F3EE] text-[#0B0B0B] text-xs font-semibold tracking-[0.18em] uppercase hover:bg-[#B79A7E] hover:text-white transition-all duration-300 min-h-[48px]"
             >
               <span>{t.hero.discover}</span>
               <ArrowDown className="w-3.5 h-3.5" />
@@ -71,7 +71,7 @@ export const Hero: React.FC = () => {
 
             <button
               onClick={() => setCurrentView('collaborate')}
-              className="inline-flex items-center gap-3 px-7 py-3.5 border border-[#C7B8A8]/40 text-[#F7F3EE] text-xs font-semibold tracking-[0.2em] uppercase hover:bg-[#F7F3EE]/10 hover:border-[#F7F3EE] transition-all duration-300"
+              className="inline-flex items-center justify-center gap-3 px-6 sm:px-7 py-3.5 sm:py-4 border border-[#C7B8A8]/40 text-[#F7F3EE] text-xs font-semibold tracking-[0.18em] uppercase hover:bg-[#F7F3EE]/10 hover:border-[#F7F3EE] transition-all duration-300 min-h-[48px]"
             >
               <span>{t.hero.workCta}</span>
               <ArrowUpRight className="w-3.5 h-3.5 text-[#B79A7E]" />
@@ -81,16 +81,16 @@ export const Hero: React.FC = () => {
       </div>
 
       {/* Bottom Bar: Scroll indicator & Domain Anchor */}
-      <div className="relative z-10 px-6 py-8 max-w-7xl mx-auto w-full border-t border-[#27272A]/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-[#C7B8A8]/70">
-        <div className="flex items-center gap-4">
-          <span className="text-[#B79A7E]">im-lolla.com</span>
+      <div className="relative z-10 px-4 sm:px-6 py-6 sm:py-8 max-w-7xl mx-auto w-full border-t border-[#27272A]/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 text-[11px] sm:text-xs text-[#C7B8A8]/70">
+        <div className="flex items-center gap-3 sm:gap-4">
+          <span className="text-[#B79A7E] font-mono">im-lolla.com</span>
           <span aria-hidden="true">·</span>
           <span>OFFICIAL DIGITAL PRESENCE</span>
         </div>
 
         <button
           onClick={handleScrollToContent}
-          className="flex items-center gap-2 tracking-[0.15em] hover:text-[#F7F3EE] transition-colors focus:outline-none"
+          className="flex items-center gap-2 tracking-[0.15em] hover:text-[#F7F3EE] transition-colors focus:outline-none min-h-[40px]"
         >
           <span>{t.hero.scroll}</span>
           <ArrowDown className="w-3.5 h-3.5 text-[#B79A7E] animate-bounce" />

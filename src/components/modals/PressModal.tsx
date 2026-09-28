@@ -54,13 +54,13 @@ export const PressModal: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#0B0B0B]/95 backdrop-blur-xl flex items-center justify-center p-4 sm:p-6 lg:p-10 animate-fadeIn">
-      <div className="relative w-full max-w-4xl bg-[#12100E] border border-[#27272A] p-6 sm:p-10 lg:p-12 text-[#F7F3EE] shadow-2xl my-8">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#0B0B0B]/95 backdrop-blur-xl flex items-start justify-center p-3 sm:p-6 lg:p-10 animate-fadeIn">
+      <div className="relative w-full max-w-4xl bg-[#12100E] border border-[#27272A] p-5 sm:p-10 lg:p-12 text-[#F7F3EE] shadow-2xl my-4 sm:my-8 min-h-0">
         
-        {/* Close Button */}
+        {/* Close Button with accessible touch target */}
         <button
           onClick={() => setCurrentView('home')}
-          className="absolute top-6 right-6 p-2 text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A] hover:border-[#B79A7E] transition-colors"
+          className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2.5 text-[#C7B8A8] hover:text-[#F7F3EE] border border-[#27272A] hover:border-[#B79A7E] transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center z-10 bg-[#12100E]/90 sm:bg-transparent"
           aria-label="Fermer"
         >
           <X className="w-5 h-5" />
@@ -199,7 +199,7 @@ export const PressModal: React.FC = () => {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] px-3.5 py-2.5 text-[#F7F3EE]"
+                      className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-3.5 py-2.5 text-base sm:text-xs text-[#F7F3EE] min-h-[44px]"
                       placeholder="Prénom & Nom du journaliste"
                     />
                   </div>
@@ -213,7 +213,7 @@ export const PressModal: React.FC = () => {
                       required
                       value={formData.media}
                       onChange={(e) => setFormData({ ...formData, media: e.target.value })}
-                      className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] px-3.5 py-2.5 text-[#F7F3EE]"
+                      className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-3.5 py-2.5 text-base sm:text-xs text-[#F7F3EE] min-h-[44px]"
                       placeholder="Nom de la revue / chaîne / média"
                     />
                   </div>
@@ -229,7 +229,7 @@ export const PressModal: React.FC = () => {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] px-3.5 py-2.5 text-[#F7F3EE]"
+                      className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-3.5 py-2.5 text-base sm:text-xs text-[#F7F3EE] min-h-[44px]"
                       placeholder="journaliste@media.com"
                     />
                   </div>
@@ -242,7 +242,7 @@ export const PressModal: React.FC = () => {
                       type="text"
                       value={formData.deadline}
                       onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
-                      className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] px-3.5 py-2.5 text-[#F7F3EE]"
+                      className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-3.5 py-2.5 text-base sm:text-xs text-[#F7F3EE] min-h-[44px]"
                       placeholder="ex: 15 Novembre 2026"
                     />
                   </div>
@@ -257,7 +257,7 @@ export const PressModal: React.FC = () => {
                     required
                     value={formData.topic}
                     onChange={(e) => setFormData({ ...formData, topic: e.target.value })}
-                    className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] px-3.5 py-2.5 text-[#F7F3EE]"
+                    className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-3.5 py-2.5 text-base sm:text-xs text-[#F7F3EE] min-h-[44px]"
                     placeholder="Sujet de l'article ou de l'interview"
                   />
                 </div>
@@ -271,7 +271,7 @@ export const PressModal: React.FC = () => {
                     required
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] px-3.5 py-2.5 text-[#F7F3EE]"
+                    className="w-full bg-[#0B0B0B] border border-[#27272A] focus:border-[#B79A7E] focus:outline-none px-3.5 py-2.5 text-base sm:text-xs text-[#F7F3EE]"
                     placeholder="Détaillez vos questions et le cadre éditorial..."
                   />
                 </div>
@@ -279,7 +279,7 @@ export const PressModal: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3.5 bg-[#F7F3EE] text-[#0B0B0B] text-xs font-semibold tracking-[0.2em] uppercase hover:bg-[#B79A7E] hover:text-white transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="w-full py-4 bg-[#F7F3EE] text-[#0B0B0B] text-xs font-semibold tracking-[0.2em] uppercase hover:bg-[#B79A7E] hover:text-white transition-all disabled:opacity-50 flex items-center justify-center gap-2 min-h-[48px]"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span>{isSubmitting ? 'TRANSMISSION...' : t.press.pressSubmit}</span>
